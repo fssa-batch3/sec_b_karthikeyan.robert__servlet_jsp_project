@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="java.util.Set"%>
 <%@page import="in.fssa.knfunding.model.Request"%>
 <%@page import="in.fssa.knfunding.service.RequestService"%>
@@ -9,7 +10,7 @@
     <title>List All Requests</title>
     <style>
     /*
-    background: linear-gradient(45deg, #FF6B6B, #FF8E53, #FFCA3A, #8AFF53, #53FFB8, #6B66FF, #C53BFF);
+     background: linear-gradient(45deg, #FF6B6B, #FF8E53, #FFCA3A, #8AFF53, #53FFB8, #6B66FF, #C53BFF);
             background-size: 600% 100%;
             animation: rainbow-bg 5s linear infinite;
             
@@ -19,6 +20,7 @@
             background-color: #f2f2f2;
             margin: 0;
             padding: 0;
+           
              
         }
         
@@ -83,27 +85,22 @@
             background-size: 600% 100%;
             animation: rainbow-bg 5s linear infinite;
         }
-        
+        */
         @keyframes rainbow-bg {
             0% { background-position: 0 0; }
             100% { background-position: 600% 0; }
         }
-        */
-        /* Hover effect */
-        /*
+        
         tr:hover {
             transform: scale(1.02);
             transition: transform 0.3s ease-in-out;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
         }
-        */
-         .edit {
-            display: flex;
-            gap: 5px;
-        }
+        
+         
 
         .edit a {
-            display: inline-block;
+           display: inline-block;
             padding: 3px 10px;
             text-decoration: none;
             color: white;
@@ -131,7 +128,7 @@
 
 <%
     RequestService requestService = new RequestService();
-    Set<Request> requestList = requestService.getAllRequests();
+    List<Request> requestList = requestService.getAllRequests();
 %>
 
 <table>
@@ -141,8 +138,9 @@
         <th>Description</th>
         <th>Category Id</th>
         <th>Amount</th>
+        <th>Status</th>
         <th>Edit</th>
-        <th>Delete</th>
+        <th>Delete</th>	
     </tr>
     
     <%
@@ -154,11 +152,13 @@
         <td><%= request1.getDescription() %></td>
         <td><%= request1.getCategoryId() %></td>
         <td><%= request1.getAmount() %></td>
+        <td><%= request1.isActive() ? "Active" : "Inactive" %></td>
+        
         <td class="edit">
-        	<a href="edit_request.jsp?id=<%= request1.getId() %>">Edit</a>
+        	<a href="request/edit?id=<%= request1.getId() %>">Edit</a>
         </td>
         <td class="delete">
-       		 <a href="delete_request.jsp?id=<%= request1.getId() %>">Delete</a>
+       		 <a href="delete_request.jsp?id=<%= request1.getId() %>">Delete</a>	
         </td>
     </tr>
     <%

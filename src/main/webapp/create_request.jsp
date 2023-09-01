@@ -83,14 +83,13 @@
         <textarea name="description" required></textarea>
         
         <label for="categoryId">Category Id:</label>
-        <input type="text"  name="categoryId" required>
+        <input type="text" name="categoryId" required>
         
-        <label for="userId">user Id:</label>
+        <label for="userId">User Id:</label>
         <input type="text" name="userId" required>
         
         <label for="amount">Amount:</label>
         <input type="number" name="amount" required>
-        
         
         <button type="submit">Create Request</button>
     </form>

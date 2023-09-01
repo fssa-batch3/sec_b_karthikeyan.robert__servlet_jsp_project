@@ -1,10 +1,12 @@
+<%@page import="java.util.List"%>
+<%@page import="in.fssa.knfunding.model.Request"%>
 <%@page import="in.fssa.knfunding.model.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Update User</title>
+    <title>Update Request</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -58,33 +60,38 @@
     </style>
 </head>
 <body>
-    <h1>Update User</h1>
-	
-	 <%
-    User user = null;
-    user = (User) request.getAttribute("userDetails");
+   <h1>Update Requests</h1>
+    
+    <%
+        Request requestDetails = null;
+    	requestDetails = (Request) request.getAttribute("requestDetails");
+    
     %>
-    <form action="update?id=<%=user.getId() %>" method="post">
-        <label for="name">Name:</label>
-        <input type="text" value="<%=user.getFullName() %>" name="name" required>
+    <form action="update" method="post">
+    
+        <input type="hidden" name="id" value="<%= requestDetails.getId() %>">
         
-        <br>
-        	
-        <label for="email">Email ID:</label>
-        <input type="email" value="<%=user.getEmail() %>" name="email" readonly>
-        
-        <br>
-        
-        <label for="phone_number">Phone Number:</label>
-        <input type="text" value="<%=user.getPhoneNumber() %>" name="phone_number" readonly>
+        <label for="title">Title:</label>
+        <input type="text" value="<%= requestDetails.getTitle() %>" name="title" required readonly>
         
         <br>
         
-        <label>Password:</label>
-        <input type="password" value="<%=user.getPassword() %>" name="password" required readonly>
+        <label for="description">Description:</label>
+        <input type="text" value="<%= requestDetails.getDescription() %>" name="description">
+        
+        <br>
+        
+        <label for="category_id">Category Id:</label>
+        <input type="number" value="<%= requestDetails.getCategoryId() %>" name="category_id" >
+        
+        <br>
+        
+        <label>Amount:</label>
+        <input type="number" value="<%= requestDetails.getAmount() %>" name="amount" required>
         
         <button type="submit">Save</button>
-        
     </form>
+    <br>
+    
 </body>
 </html>

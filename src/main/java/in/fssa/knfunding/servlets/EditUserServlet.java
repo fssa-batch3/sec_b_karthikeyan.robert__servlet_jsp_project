@@ -24,10 +24,13 @@ public class EditUserServlet extends HttpServlet {
         
      
             User user = userService.findById(id);
+            System.out.println(user);
             request.setAttribute("userDetails", user);
+            
             RequestDispatcher dispatcher = request.getRequestDispatcher("/update_user.jsp");
             dispatcher.forward(request, response);
      
     }
+	
 }
 

@@ -8,6 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import exception.ValidationException;
 import in.fssa.knfunding.model.User;
 import in.fssa.knfunding.service.UserService;
 
@@ -24,18 +26,23 @@ public class UpdateUserServlet extends HttpServlet {
         String email = request.getParameter("email");
         Long phoneNumber = Long.parseLong(request.getParameter("phone_number"));
         String password = request.getParameter("password");
-        int id = Integer.parseInt(request.getParameter("userId"));
+        int id = Integer.parseInt(request.getParameter("id"));
 
-        User user = new User();
+        User updatedUser = new User();
+        updatedUser.setId(id); 
+        updatedUser.setFullName(name); 
+        updatedUser.setEmail(email); 
+        updatedUser.setPassword(password); 
 
-        user.setFullName(name);
-        user.setEmail(email);
-        user.setPhoneNumber(phoneNumber);
-        user.setPassword(password);
-        user.setId(id);
-
-        userService.update(id, user);
-		response.sendRedirect(request.getContextPath() + "/users");
+        try {
+			userService.update(updatedUser);
+		} catch (ValidationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		response.sendRedirect(request.getContextPath() + "/list_all_user.jsp");
+		
+		
 
     }
 }

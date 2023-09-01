@@ -166,7 +166,7 @@
         <td><%= user.isActive() ? "Active" : "Inactive" %></td>
         
          <td class="edit">
-                <a href="update_user.jsp?id=<%= user.getId() %>">Edit</a>
+                <a href="user/edit?id=<%= user.getId() %>">Edit</a>
           </td>
           <td class="delete"> 
           		
