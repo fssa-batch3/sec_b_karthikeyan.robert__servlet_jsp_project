@@ -33,7 +33,7 @@ public class UpdateRequestServlet extends HttpServlet {
 
         requestService.updateRequest(requestId, updatedRequest);
         
-        response.sendRedirect(request.getContextPath() + "/list_all_request.jsp");
+        response.sendRedirect(request.getContextPath() + "/list_all_request");
         
         
       

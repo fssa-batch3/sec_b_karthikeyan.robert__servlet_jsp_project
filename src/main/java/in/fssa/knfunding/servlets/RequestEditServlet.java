@@ -2,6 +2,7 @@ package in.fssa.knfunding.servlets;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +22,10 @@ public class RequestEditServlet extends HttpServlet {
         
         if (requestDetails != null) {
             request.setAttribute("requestDetails", requestDetails);
+            
             request.getRequestDispatcher("/update_request.jsp").forward(request, response);
+
         } 
     }
 }
+	

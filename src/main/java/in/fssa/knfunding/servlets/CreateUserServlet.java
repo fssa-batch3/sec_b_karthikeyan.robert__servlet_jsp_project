@@ -35,7 +35,7 @@ public class CreateUserServlet extends HttpServlet {
             
             userService.create(newUser); 
 
-            response.sendRedirect("list_all_user.jsp");
+            response.sendRedirect(request.getContextPath()+"/users");
         } catch (Exception e) {
             e.printStackTrace();
         }

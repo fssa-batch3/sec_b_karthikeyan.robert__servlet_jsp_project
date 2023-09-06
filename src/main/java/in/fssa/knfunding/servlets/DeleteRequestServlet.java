@@ -18,6 +18,6 @@ public class DeleteRequestServlet extends HttpServlet {
         RequestService requestService = new RequestService();
         requestService.deleteRequest(requestId);
 
-        response.sendRedirect("list_all_request.jsp"); 
+        response.sendRedirect(request.getContextPath()+"/list_all_request"); 
     }
 }

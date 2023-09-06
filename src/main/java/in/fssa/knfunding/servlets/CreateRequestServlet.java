@@ -31,7 +31,7 @@ public class CreateRequestServlet extends HttpServlet {
         RequestService requestService = new RequestService();
         requestService.createRequest(newRequest);
 
-        response.sendRedirect("list_all_request.jsp");
+        response.sendRedirect(request.getContextPath()+"/list_all_request");
     }
 
 	}

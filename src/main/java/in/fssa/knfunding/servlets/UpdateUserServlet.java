@@ -40,7 +40,7 @@ public class UpdateUserServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
-		response.sendRedirect(request.getContextPath() + "/list_all_user.jsp");
+		response.sendRedirect(request.getContextPath() + "/users");
 		
 		
 

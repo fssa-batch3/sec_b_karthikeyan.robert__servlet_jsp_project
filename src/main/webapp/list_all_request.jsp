@@ -127,8 +127,8 @@
 <h1>List All Requests</h1>
 
 <%
-    RequestService requestService = new RequestService();
-    List<Request> requestList = requestService.getAllRequests();
+
+    List<Request> requestList = (List<Request>) request.getAttribute("requestList");
 %>
 
 <table>
@@ -154,8 +154,10 @@
         <td><%= request1.getAmount() %></td>
         <td><%= request1.isActive() ? "Active" : "Inactive" %></td>
         
+        
         <td class="edit">
         	<a href="request/edit?id=<%= request1.getId() %>">Edit</a>
+        	
         </td>
         <td class="delete">
        		 <a href="delete_request.jsp?id=<%= request1.getId() %>">Delete</a>	

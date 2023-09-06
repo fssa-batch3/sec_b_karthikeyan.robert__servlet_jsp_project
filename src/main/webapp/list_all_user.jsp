@@ -1,7 +1,6 @@
 <%@page import="java.util.List"%>
 <%@page import="in.fssa.knfunding.model.User"%>
-<%@page import="in.fssa.knfunding.servlets.LisrAllUser"%>
-<%@page import="in.fssa.knfunding.service.UserService"%>
+<%@page import="in.fssa.knfunding.servlets.ListAllUser"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -138,6 +137,10 @@
 
 <h1>User List</h1>
 
+      <%
+        List<User> userList = (List<User>) request.getAttribute("userList");
+      %>
+
 <table>
     <tr>
         <th>Id</th>
@@ -150,29 +153,22 @@
         
     </tr>
     
-     <% 
-        UserService userService = new UserService();
-        List<User> userList = userService.getAll(); 
-        
-        %>
-      <%  
+      <%
         for (User user : userList) {
-    %>
+      %>
     <tr>
+    
         <td><%= user.getId() %></td>
         <td><%= user.getFullName() %></td>
         <td><%= user.getEmail() %></td>
         <td><%= user.getPhoneNumber() %></td>
         <td><%= user.isActive() ? "Active" : "Inactive" %></td>
-        
-         <td class="edit">
-                <a href="user/edit?id=<%= user.getId() %>">Edit</a>
-          </td>
-          <td class="delete"> 
-          		
-          		   <a href="delete_user.jsp?id=<%= user.getId() %>">Delete</a>
-          		
-      	</td>   
+        <td class="edit">
+            <a href="user/edit?id=<%= user.getId() %>">Edit</a>
+        </td>
+        <td class="delete"> 
+            <a href="delete_user.jsp?id=<%= user.getId() %>">Delete</a>
+        </td>
     </tr>
     <%
         }
