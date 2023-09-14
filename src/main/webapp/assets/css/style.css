@@ -1,0 +1,615 @@
+*{
+    margin-left:0px;
+    margin-right: 0px;
+    
+}
+header{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* margin-top: 20px; */
+    margin-top: -10px;
+    background-color: white;
+    padding-top: 10px;
+    /* position: fixed;
+    top: 0;
+    width: 100%;
+    */
+}
+/* body{
+    margin-top: 90px;
+} */
+.logo{
+    height:80px;
+    width:150px;
+    margin-left: 80px;
+}
+.search_input_logo{
+    display:flex;
+    flex-direction: row;
+    height:30px;
+    margin-left: 40px;
+    border-radius: 0px;
+    margin-right: -30px;
+    margin-top: 15px;
+}
+.search_box{
+    width:300px;
+    border-radius: 0px;
+    border-color: gray;
+}
+.search_logo{
+    height:25px;
+}
+.search_button{
+    border-radius: 0px;
+    border-color: gray;
+}
+.Login_Register{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-decoration: none;
+    list-style: none;
+    /* margin:10px;
+    margin-right:30px; */
+    padding:10px;
+    
+}
+.login_register{
+    text-decoration: none;
+    margin-top: 1px;
+    margin-bottom: 10px;
+    margin-right:30px;
+    font-weight:900;
+    font-size: larger;
+    /* font-family: 'Rajdhani', sans-serif; */
+    font-style:inherit;
+    color:black;
+}
+.login_register:hover{
+    color: tomato;
+}
+
+.section_background{
+    background-image: url(../images/donation-banner.jpg) ;
+    background-position-y: 0;
+    background-position-x: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height:800px;
+    background-size: 100%;
+    display: flex;
+    margin:0px;
+    font-family: 'Yeseva One', cursive;
+   
+}
+.section {
+    margin: auto;
+    margin-top:150px;
+}
+.section_h1 {
+    font-size: 3.5pc;
+    color: rgba(240, 248, 255, 0.827);
+  
+}
+.section_h1_sub{
+    font-size:1cm;
+    margin-left: 7pc;
+    color: rgba(240, 248, 255, 0.827);
+    margin-top: 5%;
+}
+.slogan{
+    margin-left: 15px;
+    color: rgba(240, 248, 255, 0.827);
+}
+.section_h2 {
+    margin-left: 25%;
+    color: rgba(240, 248, 255, 0.827);
+}
+.button_P_F{
+    margin-left: 30%;
+    margin-top: 10%;
+   
+}
+.Button_fundraiser{
+    background: rgba(255, 255, 255, 0.482);
+    border-radius: 40px;
+    padding: 0.3rem 5rem;
+    font-size: 20px;
+    border: 0;
+    color: #3d231c;
+    transition: all 0.3s ease-in;
+    cursor: pointer;
+}
+
+.d-none{
+    display: none;
+}
+
+.Button_fundraiser:hover{
+    color: black;
+    background-color: tomato;
+}
+.people_profile{
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-left:7pc;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+.profiles {
+	display: flex;
+    flex-direction: row;
+    margin:50px;
+    border-radius: 1px;
+    width:20pc;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    transition: all 0.3s ease-in;
+    cursor: pointer;
+}
+
+.profiles:hover {
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    transform: scale(1.05);
+}
+
+.content{
+    padding:10px;
+}
+.funded_backers{
+
+    display:flex;
+    flex-direction: column;
+    margin:30px;
+    margin-top: 5px;
+    
+}
+.persentage{
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+    margin:4px;
+   
+}
+.persentage_space{
+    margin-left:10px;
+    margin-right: 10px;
+}
+.content_F_B{
+    display:flex;
+    flex-direction: row;
+    margin:10px;
+    border-bottom: 1px solid gray;
+}
+
+.donate_btn {
+
+    background-color: TOMATO; 
+    color: black; 
+    border: 2px solid TOMATO;
+    width:100%;
+    height: 50px;
+    margin-top: auto;
+    margin-bottom:-10px ;
+    font-weight: 900 ;
+    font-size: larger;
+
+  }
+.profile_info{
+    text-decoration: none;
+    color: black;
+}
+.profiles_row_one{
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.feature_heading{
+    padding: 10px;
+}
+.F_heading{
+    text-align: center;
+    text-decoration: underline;
+    text-underline-position: under;
+}
+.explore {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+ 
+    
+}
+.Explore_column{
+    display: flex;
+    flex-direction: column;
+    margin:10px;
+    
+}
+
+.explore_button {
+    color:rgb(0, 0, 0);
+    margin-top:25% ;
+    text-decoration: none;
+    font-size: 1.5pc;
+    
+}
+
+.choise:hover {
+    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+    transform: scale(1.05);
+}
+.choise_name{
+    color: white;
+}
+.animal_welfare{
+    display:flex;
+    justify-content: center;
+    border-color: 1px solid gray;
+    background-image: url(../images/holy-cow.jpg);
+    width:250px;
+    height:150px;
+    margin-top: 30px;
+    
+
+}
+.education{
+    display:flex;
+    justify-content: center;
+    border-color: 1px solid gray;
+    background-image: url(../images/education.jpg);
+    width:250px;
+    height:150px;
+    margin-top:50px;
+    
+    
+}
+
+.children_welfar{
+    display:flex;
+    justify-content: center;
+    border-color: 1px solid gray;
+    background-image: url(../images/children.jpg);
+    width:250px;
+    height:150px;
+    margin-top:30px;
+
+}
+.medical_causes{
+    display:flex;
+    justify-content: center;
+    border-color: 1px solid gray;
+    background-image: url(../images/medical-clinic.jpg);
+    background-size: 100% 100%;
+    width:250px;
+    height:150px;
+    margin-top:50px;
+
+}
+.natural_disaster{
+    display:flex;
+    justify-content: center;
+    border-color: 1px solid gray;
+    background-image: url(../images/naturaldisasters.jpg);
+    width:250px;
+    height:150px;
+    margin-top:30px;
+
+}
+.temple_welfare{
+    display:flex;
+    justify-content: center;
+    border-color: 1px solid gray;
+    background-image: url(../images/temple.jpg);
+    width:250px;
+    height:150px;
+    margin-top:50px;
+}
+.footer_section1{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color:black;
+    margin-top: 40px;
+    margin-bottom: 0px;
+   
+}
+.footer_logo{
+    height:80px;
+    width:150px;
+    margin-left: 100px;
+    margin: 30px;
+    border-radius: 1em;
+}
+.contact{
+    /* margin-top: 50px; */
+    display: flex;
+    padding-left: 43%;
+    margin-bottom: 10px;
+    
+}
+.con_info{
+    display: flex;
+    flex-direction: row;
+
+}
+.instagram_fb{
+    
+    display: flex;
+    margin: 5px;
+}
+.footer_contact{
+    display: flex;
+    /* justify-content: flex-end; */
+    /* text-decoration: none; */
+    list-style: none;
+    color:white;
+}
+.footer_contact_list{
+    list-style: none;
+    /* padding-right:50% ; */
+    
+}
+.aboutUS{
+    text-decoration: none;
+    color: white;
+    
+}
+.AboutUS{
+    text-decoration: none;
+    color: black;
+}
+.AboutUS:hover{
+    color: tomato;
+}
+
+.abus{
+    margin:10px;
+}
+.aboutUS:hover{
+    color: tomato;
+}
+
+.footer_section2{
+    background-color: black;
+    color: white;
+    border-top:2px solid white ;
+    margin-bottom: -6px;
+    
+}
+.copyrights{
+    margin-left: 23%;
+    color: white;
+}
+.Disclaimer{
+    color: white;
+    font-size:12px;
+    /* padding-left: 10%;
+    padding-right: 10%; */
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 10px;
+    margin-right: 10%;
+    border-top: 2px solid white;
+    margin-left: 10%;
+
+}
+.progressa {
+    border-radius: 0px !important;
+    margin-left: 10px;
+    margin-right:10px ;
+    overflow: hidden;
+    margin-bottom: 20px;
+    background-color: rgba(0,0,0,0.5);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+    line-height: 16px;
+    height: 15px;
+    font-size: 15px;
+    
+}
+.progressab {
+    background-image: -webkit-linear-gradient(45deg,rgba(255,255,255,0.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,0.15) 50%,rgba(255,255,255,0.15) 75%,transparent 75%,transparent);
+    background-image: -o-linear-gradient(45deg,rgba(255,255,255,0.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,0.15) 50%,rgba(255,255,255,0.15) 75%,transparent 75%,transparent);
+    -webkit-background-size: 40px 40px;
+    background-size: 40px 40px;
+    -webkit-transition: width .25s ease,height .25s ease,font-size .25s ease;
+    -moz-transition: width .25s ease,height .25s ease,font-size .25s ease;
+    -ms-transition: width .25s ease,height .25s ease,font-size .25s ease;
+    -o-transition: width .25s ease,height .25s ease,font-size .25s ease;
+    transition: width .25s ease,height .25s ease,font-size .25s ease;
+    width: 0;
+    color: #fff;
+    text-align: center;
+    font-family: 'Open Sans',sans-serif !important;
+	animation: progress-bar-stripes 2s linear infinite reverse;
+}
+.dropdownn {
+    position: relative;
+    /* display: inline-block; */
+  }
+  .login_btn{
+    /* background-color: black;
+    border-radius: 0.5cm;
+    color: white;
+    width: 50%; */
+    background: white;
+    border-radius: 40px;
+    padding: 0.38rem 1rem;
+    border: solid 2px tomato;
+    transition: all 0.3s ease-in;
+    
+}
+.login_btn:hover{
+    color: white;
+    background-color: tomato;
+}
+  .dropdownn-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 140px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    margin-left: -20px;
+    font-style: normal;
+  }
+  
+  .dropdownn-content a {
+    color: black;
+    padding: 12px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdownn-content a:hover {
+    background-color: tomato;
+}
+  
+  .dropdownn:hover .dropdownn-content {
+    display:block;
+    
+  }
+
+@keyframes progress-bar-stripes{
+0% {
+    background-position: 40px 0;
+}
+100% {
+    background-position: 0 0;
+}
+}
+.whychooseus_div{
+    border-bottom: black;
+    display: flex;
+    justify-content: center; 
+    margin-left: 20%;
+    margin-right: 20%;
+}
+.whyChoose_US{
+    margin-top: 100px;
+    border-bottom: 2px solid black;
+}
+.why-choose-us-box {
+    font-size: 110%;
+    text-align: center;
+    border: 1px solid #ddd;
+    padding: 20px;
+    min-height: 180px;
+    margin-bottom: 20px;
+    margin: 50px;
+    width: 200px;
+}
+.container_box{
+    display: flex;
+    flex-direction: column;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.box_column{
+    display: flex;
+    flex-direction: row;
+    /* width: 50%; */
+    align-items: center;
+    margin-left: 15%;
+}
+
+
+
+
+
+/* responsive */
+
+@media only screen and (max-width:420px) {
+    header{
+        height:50px;
+    }   
+    .search_input_logo{
+        display: none;
+    }
+    .logo{
+        height:100%;
+        width:100%;
+        margin-left: 0;
+    }
+    .Login_Register{
+        padding:0;
+        margin-right: 0px;
+        
+    }
+    .login_register {
+        font-size:15px;
+    }
+    .profiles_row_one{
+        flex-direction: column;
+    }
+    .section_background {
+        background-image: url(../images/donation-banner.jpg);
+        background-position-y: 0; 
+        background-position-x: center;
+        
+        background-repeat: no-repeat;
+        height: 50%; 
+        background-size: 150%; 
+        display: flex; 
+        margin: 0px;
+        font-family: 'Yeseva One', cursive;
+    }
+    .section {
+        margin: 0px;
+        margin-top: 0px;
+    }
+    .section_h1 {
+        font-size: xx-large;
+         color: rgba(0, 0, 0, 0.827);
+    }
+
+    .section_h1_sub {
+        font-size: x-large; 
+        margin-left: 0px;
+        color: rgba(0, 2, 3, 0.827);
+    }
+    .slogan {
+        font-size: large;
+        margin-left: 15px; 
+         color: rgba(0, 0, 0, 0.827);
+    }
+    .section_h2 {
+        margin-left: 0px;
+        color: rgba(0, 0, 0, 0.827);
+    }
+    .button_P_F {
+        margin-left: 0px;
+    }
+    .people_profile {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-left:0px; 
+        margin-top: 20px;
+    }
+    .explore {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        margin-left: 15%;
+    }
+    .footer_section1 {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: black;
+        margin-top: 40px;
+        margin-bottom: 0px;
+    }
+    .copyrights {
+        margin-left: 15px;
+    }
+
+}
+
+   
+       

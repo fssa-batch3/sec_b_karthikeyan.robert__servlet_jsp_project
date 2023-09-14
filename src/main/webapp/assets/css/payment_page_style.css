@@ -1,0 +1,108 @@
+.payment_section{
+    display: flex;
+    flex-direction: row;
+}
+.payment_left{
+    width: 70%;
+    padding: 50px;
+    padding-left: 80px;
+}
+.payment_right{
+    width: 25%;
+    padding-left:30px;
+    padding-right: 30px;
+    padding-bottom: 30px;
+    border: 1px solid gray;
+    margin: 50px;
+}
+.right_row_1{
+    font-size: larger;
+    color: gray;
+}
+.right_row_2{
+    display: flex;
+    justify-content: center;
+}
+.onetime{
+    width: 220px;
+    height: 34px;
+    font-size: larger;
+    border: 2px solid black;
+    color:black;
+    background-color:  #d9d4d4d2;
+}
+.right_row_3{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.row_3_para{
+    font-size: large;
+    color: gray;
+}
+.right_row_4{
+    display: flex;
+    
+}
+.right_row_5{
+    font-size: 12px;
+    margin-right: 60%;
+}
+.right_row_6{
+    border-top: 2px solid gray;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.right_row_7{
+    color: gray;
+}
+.right_row_8 {
+    display: flex;
+    justify-content: center;
+}
+.left_row_1{
+    color: gray;
+    font-size: large;
+}
+.left_row_2 {
+    font-size: x-large;
+    color: gray;
+}
+.left_row_3 {
+    display: flex;
+    justify-content: space-between;
+    width: 700px;
+}
+.left_row_4{
+    color: gray;
+}
+.left_row_4_para{
+    font-size: x-large;
+    color: gray;
+}
+.left_row_5{
+    display:flex ;
+    justify-content: space-evenly;
+}
+.fullname_anonymous{
+    border: 1px solid gray;
+    padding: 5px;
+    color: gray;
+}
+.mandatory_input{
+    width:250px;
+    padding: 10px;
+    margin-right: 20px;
+    height: 30px;
+    margin-left: 20px;
+    border:1px solid gray;
+}
+.amount_symbol{
+    margin-left: 80px;
+    margin-right: 5px;
+}
+.Total_amount_symbol{
+    margin-left: 220px;
+   
+}

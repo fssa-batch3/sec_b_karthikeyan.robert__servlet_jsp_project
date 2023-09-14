@@ -1,0 +1,68 @@
+.profile_head{
+    display: flex;
+    flex-direction: column;
+    
+}
+.header_1{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    
+}
+.header_2{
+    background-color: gray;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 2px solid black;
+}
+.profile_head_2{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 30px;
+    text-decoration: none;
+    list-style: none;
+    color:white;
+    margin-top: 8px;
+
+}
+.welcome_name{
+    color: grey;
+
+}
+.welcome_tagline{
+    width: 40%;
+    margin-left: 10px;
+    font-size: large;
+    background-color: silver;
+    border: 1px solid black;
+}
+.history_1{
+    padding: 10px;
+    margin-top: 20px;
+    border:2px solid gray ;
+    padding-bottom:190px ;    
+}
+.column_1{
+    color: gray;
+    
+    
+}
+.log_out{
+    margin-top: -1px;
+}
+
+.footer{
+    margin-top: 500px;
+}
+
+.profiles_row_one {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: 2px solid black;  
+    margin-right: 6%;  
+}

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import in.fssa.knfunding.model.Request;
 import in.fssa.knfunding.service.RequestService;
 
+
 @WebServlet("/list_all_request")
 public class ListAllRequest extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -21,10 +22,12 @@ public class ListAllRequest extends HttpServlet {
             throws ServletException, IOException {
         RequestService requestService = new RequestService();
         List<Request> requestList = requestService.getAllRequests();
+        
 
         request.setAttribute("requestList", requestList);
+        System.out.println(request.getAttribute("requestList"));
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/list_all_request.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
         dispatcher.forward(request, response);
     }
 
