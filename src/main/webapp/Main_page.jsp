@@ -1,3 +1,4 @@
+<%@page import="in.fssa.knfunding.service.RequestService"%>
 <%@ page import="in.fssa.knfunding.model.User"%>
 <%@page import="java.util.List"%>
 <%@page import="in.fssa.knfunding.model.Request"%>
@@ -18,10 +19,6 @@
 
 </head>
 
-<%
-User user = (User) session.getAttribute("user");
-System.out.print(user); 
-%>
 
 
 <header>
@@ -52,6 +49,10 @@ System.out.print(user);
                 </li> -->
 
 		</ul>
+		<%
+		User user = (User) session.getAttribute("user");
+		%>
+		
 
 		<div class="profile_name">
 			<!-- KARTHIKEYAN -->
@@ -82,7 +83,7 @@ System.out.print(user);
                     <b class="slogan">Start a fundraiser within 5 minutes!</b>
                 </h2> -->
 			<div class="button_P_F">
-				<a href="<%=request.getContextPath()%>/petition/fundraiser_page_1.jsp">
+				<a href="<%=request.getContextPath()%>/create_request.jsp">
 					<button class="Button_fundraiser">START A FUNDRAISER</button>
 				</a>
 
@@ -95,7 +96,73 @@ System.out.print(user);
 		
 	</section>
 	<section class="people_profile">
-	 
+	 <%
+        RequestService requestservice = new RequestService();
+        List<Request> requestList = requestservice.getAllRequests();
+    
+
+     %>
+   
+    
+<%
+
+        for (Request request1 : requestList) {
+   
+        	%>
+             <div class="profiles">
+                <div class="profile_info">
+                    <div class="content">
+					    <img alt="post" name="img_url" class="profile-post"  style="width:100%;" src="<%= request1.getImg_url() %>">
+					    
+					</div>
+					<div class="content">
+                        <p>
+                            <b><%= request1.getTitle() %>
+                            </b>
+                        </p>
+                        <p>
+                           <%= request1.getDescription() %>
+                        </p>
+                    </div>
+                    <div class="content">
+                        
+
+                    </div>
+                    <div class="content_F_B">
+                        <div class="funded_backers">
+                        	<p style="margin:5px;"> 
+                        		<b>RS.67000</b>	
+                        		
+                        		<p style="margin:5px;">
+                        		 raised out of 
+                        		 </p>
+                        		
+                        		<p style="margin:5px;">
+                        		
+                        		<b>Rs.<%= request1.getAmount() %></b>
+                        		</p>
+                        		
+                        	</p>
+                        	
+                            
+                        </div>
+                        
+                       
+                    </div>
+                    
+                    <div>
+                        <button class="donate_btn">
+                            Donate
+                        </button>
+                    </div>
+                    </div>
+               
+                </div>
+            
+            
+        <%
+        }
+        %>
   
    
 </section>
@@ -164,7 +231,6 @@ System.out.print(user);
 			<div class="box_column">
 				<div class="why-choose-us-box">
 					<div class="icon">
-						<!-- <i class="fa fa-lock"></i> -->
 						<img
 							src="https://cdn.iconscout.com/icon/free/png-512/free-lock-2693963-2235835.png?f=avif&w=512"
 							alt="image" width="40px" height="40px">
@@ -179,7 +245,6 @@ System.out.print(user);
 				</div>
 				<div class="why-choose-us-box">
 					<div class="icon">
-						<!-- <i class="fa fa-lock"></i> -->
 						<img
 							src="https://cdn.iconscout.com/icon/free/png-512/free-history-watch-time-manage-visit-cache-46265.png?f=avif&w=512"
 							alt="image" width="40px" height="40px">
@@ -194,7 +259,6 @@ System.out.print(user);
 				</div>
 				<div class="why-choose-us-box">
 					<div class="icon">
-						<!-- <i class="fa fa-lock"></i> -->
 						<img
 							src="https://cdn.iconscout.com/icon/free/png-512/free-thumbs-up-44-624869.png?f=avif&w=512"
 							alt="image" width="40px" height="40px">
@@ -271,11 +335,13 @@ System.out.print(user);
 					class="instagram_fb"> <img
 					src="<%=request.getContextPath()%>/assets/images/instagram.png" alt="image"
 					height="40px" width="50px">
-				</a> <a href="https://www.facebook.com/profile.php?id=100057753970924"
+				</a> 
+				<a href="https://www.facebook.com/profile.php?id=100057753970924"
 					class="instagram_fb"> <img
 					src="<%=request.getContextPath()%>/assets/images/facebook.png" alt="image"
 					height="40px" width="50px">
-				</a> <a href="https://www.linkedin.com/in/karthi-keyan-b01438254/"
+				</a> 
+				<a href="https://www.linkedin.com/in/karthi-keyan-b01438254/"
 					class="instagram_fb"> <img
 					src="<%=request.getContextPath()%>/assets/images/linkedin.png" alt="image"
 					height="42px" width="50px">
@@ -285,8 +351,8 @@ System.out.print(user);
 			<!-- </section>
             <section class="footer_section2"> -->
 			<div class="copyrights">
-				<b> KN FUNDING is a Registered Trademark. © 2022 KN FUNDING.
-					All Rights Reserved. Made by karthikeyan with 💗 </b>
+				<b> KN FUNDING is a Registered Trademark. Â© 2022 KN FUNDING.
+					All Rights Reserved. Made by karthikeyan with ð </b>
 			</div>
 			<div class="Disclaimer">
 				<b>Disclaimer:</b> Please note that contributing through KN funding
@@ -391,7 +457,7 @@ System.out.print(user);
      //   div_funded_backers_1.append(div_para_funded);
 
         //    div_funded_amount = document.createElement("p");
-        //    div_funded_amount.innerText = "₹"+colected ;
+        //    div_funded_amount.innerText = "â¹"+colected ;
         //    div_funded_backers_1.append(div_funded_amount);
 
         //    div_persentage = document.createElement("div");

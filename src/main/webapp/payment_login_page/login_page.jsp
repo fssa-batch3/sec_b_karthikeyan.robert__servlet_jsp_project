@@ -51,6 +51,7 @@
     </header>
     <body>
     
+    
         <section class="section_right_left">
             <div class="login_left login_or_register">
                 <form action="<%=request.getContextPath()%>/Login" role="form" method="post">
@@ -64,6 +65,7 @@
                     </div>
                     
                     <div class="input">
+            
                 
                         <input 
                             id = "password"
@@ -75,6 +77,12 @@
                             class="input_1">
 
                     </div>
+                            <%
+    String errorMessage = (String)request.getAttribute("errorMessage");
+    if(errorMessage != null){
+    	out.println(errorMessage);
+    }
+    %>
                     <div class="login_button_a">
                         <button type="submit" class="login_button_a"> LOGIN</button>    
                     </div>

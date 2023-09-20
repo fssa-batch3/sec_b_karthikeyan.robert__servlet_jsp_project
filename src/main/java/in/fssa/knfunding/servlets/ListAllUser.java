@@ -20,11 +20,9 @@ public class ListAllUser extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<User> userList = userService.getAll();
-        
-        request.setAttribute("userList", userList);
+      
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/list_all_user.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("./our profile/our_profile.jsp");
         dispatcher.forward(request, response);
     }
 }

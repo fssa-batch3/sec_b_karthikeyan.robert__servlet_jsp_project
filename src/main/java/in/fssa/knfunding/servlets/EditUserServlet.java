@@ -22,7 +22,6 @@ public class EditUserServlet extends HttpServlet {
         
         UserService userService = new UserService();
         
-     
             User user = userService.findById(id);
             request.setAttribute("userDetails", user);
             

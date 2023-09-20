@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import in.fssa.knfunding.model.User;
 import in.fssa.knfunding.service.UserService;
@@ -24,16 +25,19 @@ public class LoginUserServlet extends HttpServlet {
 		User user = userService.findByEmail(email, password);
 		System.out.println(user);
 
-		if (user != null && user.getPassword().equals(password)) {
+		if (user != null && user.getEmail().equals(email) && user.getPassword().equals(password)) {
 
-			request.getSession().setAttribute("user", user);
+			HttpSession session = request.getSession();
+			session.setAttribute("user", user);
 
 			response.sendRedirect(request.getContextPath() + "/Main_page.jsp");
 		} else {
 
-			request.setAttribute("errorMessage", "Invalid email or password. Please try again.");
+			request.setAttribute("errorMessage", "Invalid.Please try again.");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("payment_login_page/login_page.jsp");
 			dispatcher.forward(request, response);
 		}
 	}
+	
 }
+

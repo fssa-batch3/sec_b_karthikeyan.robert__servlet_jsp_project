@@ -29,6 +29,7 @@ public class UpdateUserServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
 
         User updatedUser = new User();
+        
         updatedUser.setId(id); 
         updatedUser.setFullName(name); 
         updatedUser.setEmail(email); 

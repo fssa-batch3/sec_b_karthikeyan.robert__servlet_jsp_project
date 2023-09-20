@@ -17,6 +17,6 @@ public class DeleteUserServlet extends HttpServlet {
         UserService userService = new UserService();
         userService.delete(userId);
 
-        response.sendRedirect("users"); 
+        response.sendRedirect("index.jsp"); 
     }
 }

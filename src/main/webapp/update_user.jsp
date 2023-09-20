@@ -1,3 +1,4 @@
+<%@page import="in.fssa.knfunding.service.UserService"%>
 <%@page import="in.fssa.knfunding.model.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -55,14 +56,35 @@
         button[type="submit"]:hover {
             background-color: #0056b3;
         }
+        .delete_btn{
+        	background-color: red;
+        	text-decoration:none;
+        	
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .delete_btn:hover{
+        	background-color:red;
+        	color:white;
+        	
+        }
+        
+        
+        .delete_btn a {
+        	    text-decoration: none;
+    			color: white;
+        }
     </style>
 </head>
 <body>
     <h1>Update User</h1>
 	
 	 <%
-    User user = null;
-    user = (User) request.getAttribute("userDetails");
+		User user = (User) session.getAttribute("user");
+	 	
     %>
     <form action="update?id=<%=user.getId() %>" method="post">
         <label for="name">Name:</label>
@@ -85,6 +107,11 @@
         
         <button type="submit">Save</button>
         
+		<button class="delete_btn">          
+		  <a href="<%=request.getContextPath()%>/delete_user.jsp?id=<%= user.getId() %>" >
+							Delete
+			</a>
+		</button>        
     </form>
 </body>
 </html>

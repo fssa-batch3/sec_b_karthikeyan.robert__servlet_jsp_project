@@ -1,10 +1,12 @@
 <!DOCTYPE html>
+<%@page import="in.fssa.knfunding.model.Request"%>
+<%@page import="java.util.List"%>
 <html lang="en">
     <head>
-        <link rel="stylesheet" href="../assets/css/Main_page_style.css">
-        <link rel="stylesheet" href="../assets/css/style.css">
+        <link rel="stylesheet" href="./assets/css/Main_page_style.css">
+        <link rel="stylesheet" href="./assets/css/style.css">
         <!-- <link rel="stylesheet" href="../assets/css/our_profile_style.css" > -->
-        <link rel="stylesheet" href="../assets/css/my_petition_style.css">
+        <link rel="stylesheet" href="./assets/css/my_petition_style.css">
         <title>KN funding</title> 
     </head>
 
@@ -74,18 +76,61 @@
             <div class="welcome_name">
                 <h2>MY CAMPAIGNS</h2>
             </div>
-        
-            <section class="people_profile">
-
-                <!-- <section class="history_1"> -->
-                <!-- <div class="column_1">
-                
-                    <h3>No results found</h3>
-                  
-                    </div>
-                -->
+		       <section class="people_profile">
+    <%
     
-            </section>
+
+    List<Request> userRequests = (List<Request>) request.getAttribute("userRequests");
+   %>
+   
+   <% 
+    for (Request request1 : userRequests) {
+%>
+
+  
+        <div class="profiles">
+            <div class="profile_info">
+                <div class="content">
+                    <img alt="post" name="img_url" class="profile-post" style="width:100%;" src="<%= request1.getImg_url() %>">
+                </div>
+                <div class="content">
+                    <p>
+                        <b><%= request1.getTitle() %></b>
+                    </p>
+                    <p><%= request1.getDescription() %></p>
+                </div>
+                <div class="content">
+                    <!-- Additional content here if needed -->
+                </div>
+                <div class="content_F_B">
+                    <div class="funded_backers">
+                        <p style="margin:5px;">
+                            <b>RS.67000</b>
+                        </p>
+                        <p style="margin:5px;">
+                            raised out of
+                        </p>
+                        <p style="margin:5px;">
+                            <b>Rs.<%= request1.getAmount() %></b>
+                        </p>
+                    </div>
+                </div>
+                <div style="display: flex; justify-content: space-evenly;">
+                    <button class="edit" style="background-color: tomato;border: tomato;width: 100px;height: 30px;">
+        	<a href="request/edit?id=<%= request1.getId() %>" style="text-decoration: none;color: black;font-size: 1pc;font-weight: bold;">Edit</a>
+        	
+        </button>
+        <button class="delete" style="background-color: tomato;border: tomato;width: 100px;height: 30px;">
+       		 <a href="delete_request.jsp?id=<%= request1.getId() %>" style="text-decoration: none;color: black;font-size: 1pc;font-weight: bold;">Delete</a>	
+        </button>
+                </div>
+            </div>
+        </div>
+    <%
+    }
+    %>
+</section>
+		        
 
         </div>
 

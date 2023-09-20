@@ -1,18 +1,19 @@
 <!DOCTYPE html>
+<%@page import="in.fssa.knfunding.model.User"%>
 <html lang="en">
     <head>
         <title>KN funding</title>
         <link rel="icon" type="image/x-icon" href="./project/assets/images/logo.png">
-        <link rel="stylesheet" href="../assets/css/Main_page_style.css">
-        <link rel="stylesheet" href="../assets/css/style.css">
-        <link rel="stylesheet" href="../assets/css/our_profile_style.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/Main_page_style.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/style.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/our_profile_style.css">
     </head>
 
     <header class="profile_head">
         <div class="header_1">
             <div>
-                <a href="../Main_page.html">
-                    <img src="../assets/images/logo.png" alt="image" class="logo"> 
+                <a href="<%=request.getContextPath()%>/Main_page.html">
+                    <img src="<%=request.getContextPath()%>/assets/images/logo.png" alt="image" class="logo"> 
                 </a>
             </div>    
             <!-- <div class="search_input_logo">
@@ -24,7 +25,7 @@
             <div class="profile_logo">
                 <ul class="LoginRegister">
                     <li class="Login login_register dropdownn">
-                      <a class="AboutUS" href="../project/knfunding_details/AL_about_us.html" >  About us </a>
+                      <a class="AboutUS" href="<%=request.getContextPath()%>/knfunding_details/AL_about_us.jsp" >  About us </a>
                         <!-- <div class="dropdownn-content">
                             <a href="../project/knfunding_details/AL_about_us.html">Who we are</a>
                             <a href="../project/knfunding_details/AL_about_us.html">What we do</a>
@@ -42,19 +43,28 @@
                         </li> -->
             
                     </ul>
-               
-                <div id="user_name" class="profile_name Login">
-                    <!-- KARTHIKEYAN -->
-                </div>
+               		<%
+						User user = (User) session.getAttribute("user");
+               		
+               			
+               			
+					%>
+
+		<div class="profile_name">
+			<!-- KARTHIKEYAN -->
+			<%=user.getFullName()%>
+		</div>
                 <!-- <a href="./our profile/our_profile.html"> -->
                 <div class="logo_profile">
                     <div class="dropdown">
-                        <img src="../assets/images/user.png" alt="image" class="user_logo">
+                        <img src="<%=request.getContextPath()%>/assets/images/user.png" alt="image" class="user_logo">
                         <div class="dropdown-content">
-                            <a id="myButton">
+                            <a href="<%=request.getContextPath()%>/user/edit?id=<%= user.getId() %>" >
                                 Edit profile  
                             </a>
-                            <a href="../../index.html">Log Out</a>
+                            
+                            
+                            <a href="<%=request.getContextPath()%>/logout">Log Out</a>
                   
                         </div>
                     </div>
@@ -65,7 +75,7 @@
         </div>  
         <div id="myPopup" class="popup">
             
-            <form class="form-horizontal popup-content">
+            <form class="form-horizontal popup-content" action=>
                
                 <div class="edit_profile_pop">
 
@@ -74,7 +84,7 @@
                     </div>
                     
                     <button class="close_btn">
-                        <img src="../assets/images/close.png" alt="image"
+                        <img src="<%=request.getContextPath()%>/assets/images/close.png" alt="image"
                         class="close_btn_img" >
                     </button>
                 </div>
@@ -82,8 +92,11 @@
                 <div class="form-group">
                     <label class="col-lg-3 control-label">Full name:</label>
                     <div class="col-lg-8">
-                        <input class="form-control" type="text" 
-                            id="name" pattern="/[A-Za-z]{3,20}/" readonly required>
+                        <input class="form-control" type="text" id="name"
+                              value="<%= user.getFullName() %>" readonly required>
+                            
+                            
+                            
                         <!-- <input type="text" id="textInput" required> -->
 
                     </div>
@@ -92,14 +105,14 @@
                 <div class="form-group">
                     <label class="col-lg-3 control-label">Email:</label>
                     <div class="col-lg-8">
-                        <input class="form-control" type="email" id="email" readonly required>
+                        <input class="form-control" type="email"  value="<%= user.getEmail() %>" readonly required>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-md-3 control-label">Mobile Number:</label>
                     <div class="col-md-8">
-                        <input class="form-control" type="number" id="number" readonly required>
+                        <input class="form-control" type="number"  value="<%= user.getPhoneNumber() %>" readonly required>
                     </div>
                 </div>
 
@@ -122,10 +135,10 @@
 
         <div class="header_2">
             <ul class="profile_head_2">
-                <a href="./our_profile.html" class=" profile_head_2">
+                <a href="<%=request.getContextPath()%>/our profile/our_profile.jsp" class=" profile_head_2">
                     <li><b> DASHBOARD </b></li>
                 </a>
-                <a href="./my_campaigns.html" class=" profile_head_2">
+                <a href="<%=request.getContextPath()%>/user_requests" class=" profile_head_2">
                     <li> <b>MY CAMPAIGNS</b></li>
                 </a>
                 <a href="#" class=" profile_head_2">
@@ -141,11 +154,13 @@
         <div class="dashboard">
             <div class="welcome_name">
                 <h2 class="welcome">Welcome,</h2>
-                <span id="welcome_user_name" class="welcome_user_name"></span>
+                <span id="welcome_user_name" class="welcome_user_name">
+                <%=user.getFullName()%>
+                </span>
         
             </div>
             <div class="welcome_tagline">
-                💗 You are now a part of KN funding Family...!
+                 You are now a part of KN funding Family...!
             </div>
             <div class="history_1">
                 <div class="column_1">
@@ -215,7 +230,7 @@
         <footer class="footer">
             <section class="footer_section1">
                 <div class="con_info">
-                    <img src="../../project/assets/images/footer_logo.png" alt="image" class="footer_logo">
+                    <img src="<%=request.getContextPath()%>/assets/images/footer_logo.png" alt="image" class="footer_logo">
     
                     
     
@@ -237,7 +252,7 @@
                             <li>
                                 <h2>GET STARTED</h2>
                             </li>
-                            <li class="abus"><a href="../knfunding_details/AL_about_us.html" class="aboutUS">About us</a></li>
+                            <li class="abus"><a href="<%=request.getContextPath()%>/knfunding_details/AL_about_us.jsp" class="aboutUS">About us</a></li>
                             <li class="abus"><a href="#" class="aboutUS">How It Works</a></li>
                             
     
@@ -248,9 +263,9 @@
                             <li>
                                 <h2>OUR POLICIES</h2>
                             </li>
-                            <li class="abus"><a href="../knfunding_details/AL_terms_and_contition_page.html" class="aboutUS">Terms of Use</a></li>
-                            <li class="abus"><a href="../knfunding_details/AL_privacy_policy.html" class="aboutUS">Privacy Policy</a></li>
-                            <li class="abus"><a href="../knfunding_details/AL_verification.html" class="aboutUS">Verified Accounts</a></li>
+                            <li class="abus"><a href="<%=request.getContextPath()%>/knfunding_details/AL_terms_and_contition_page.html" class="aboutUS">Terms of Use</a></li>
+                            <li class="abus"><a href="<%=request.getContextPath()%>/knfunding_details/AL_privacy_policy.html" class="aboutUS">Privacy Policy</a></li>
+                            <li class="abus"><a href="<%=request.getContextPath()%>/knfunding_details/AL_verification.html" class="aboutUS">Verified Accounts</a></li>
                             
     
                         </ul>
@@ -259,13 +274,13 @@
                     <div class="contact">
     
                         <a href="https://www.instagram.com/karthi_kn_offl/" class="instagram_fb">
-                            <img src="../../project/assets/images/instagram.png" alt="image" height="40px" width="50px">
+                            <img src="<%=request.getContextPath()%>/assets/images/instagram.png" alt="image" height="40px" width="50px">
                         </a>
                         <a href="https://www.facebook.com/profile.php?id=100057753970924" class="instagram_fb">
-                            <img src="../../project/assets/images/facebook.png" alt="image" height="40px" width="50px">
+                            <img src="<%=request.getContextPath()%>/assets/images/facebook.png" alt="image" height="40px" width="50px">
                         </a>
                         <a href="https://www.linkedin.com/in/karthi-keyan-b01438254/" class="instagram_fb">
-                            <img src="../../project/assets/images/linkedin.png" alt="image" height="42px" width="50px">
+                            <img src="<%=request.getContextPath()%>/assets/images/linkedin.png" alt="image" height="42px" width="50px">
                         </a>
     
                     </div>
@@ -290,22 +305,7 @@
         <script>
             
 
-        const userId = JSON.parse(localStorage.getItem("userId"));
-        const user_list = JSON.parse(localStorage.getItem("user_list"));
-
-        function login_data(e) {
-        return e.number == userId;
-        }
-        user_data = user_list.find(login_data);
-        document.querySelector("#user_name").innerText = user_data.name;
-        document.querySelector("#welcome_user_name").innerText = user_data.name;
-
-
-        document.getElementById("name").value = user_data['name'];
-        document.getElementById("email").value = user_data['email'];
-        document.getElementById("number").value = user_data['number'];
-
-   
+       
 
         //EDIT popup
 
@@ -317,7 +317,7 @@
         // user_data = user_list.find(login_data);
 
   
-
+		/** 
         const sumbit = document.querySelector("form");
         sumbit.addEventListener("submit", findReadonly1)
 
@@ -325,16 +325,16 @@
         save.addEventListener("click", saveUpdate)
 
         function findReadonly(e) {
-            document.getElementById("name").removeAttribute("readonly");
+            let name_field = document.getElementById("name");
+            name_field.removeAttribute("readonly");
+            name_field.focus();
             // document.getElementById("name").setAttribute("required");
-            document.getElementById("email").removeAttribute("readonly");
             // document.getElementById("email").setAttribute("required");
 
-        }
+        } 
         function findReadonly1(e) {
             document.getElementById("name").setAttribute("readonly", "true");
-            document.getElementById("email").setAttribute("readonly", "true");
-        }
+        } 
         const editThing = document.querySelector(".btn-primary");
         editThing.addEventListener("click", findReadonly);
 
@@ -402,6 +402,12 @@
                 }
             });
 
+            
+            let edit_button = document.querySelector(".button-79");
+            edit_button.addEventListener("click",() => {
+            	document.getElementById("full_name_field").removeAttribute("readonly")
+            }) **/
+            
 </script>
 
     </body>

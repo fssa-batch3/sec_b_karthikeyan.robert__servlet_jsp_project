@@ -1,3 +1,5 @@
+<%@page import="in.fssa.knfunding.service.UserService"%>
+<%@page import="in.fssa.knfunding.model.User"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -81,15 +83,42 @@
         
         <label for="description">Description:</label>
         <textarea name="description" required></textarea>
+
+        <div class="Basic_info">
+		    <label for="categoryId">Category</label>
+				    <select name="categoryId" class="option input_option" required>
+				   		<option value="None" >None</option>
+				        <option value="4">Animal welfare</option>
+				        <option value="5">Children</option>
+				        <option value="2">Education</option>
+				        <option value="3">Temple & Culture</option>
+				        <option value="1">Medical causes</option>
+				        <option value="6">Natural Disaster</option>
+				        
+				    </select>
+				    
+		</div> 
+		
+        <label for="img_url">Image:</label>
+        <input type="text" name="img_url" required>
         
-        <label for="categoryId">Category Id:</label>
-        <input type="text" name="categoryId" required>
-        
-        <label for="userId">User Id:</label>
-        <input type="text" name="userId" required>
+        <%
+		// Retrieve the user ID from the session and store it in the 'user_id' variable
+		HttpSession session2 = request.getSession(false);
+		int user_id = -1; // Default value if user_id is not found in the session
+		
+		if (session2 != null) {
+		    Object userIdAttribute = session.getAttribute("user_id");
+		    if (userIdAttribute instanceof Integer) {
+		        user_id = (int) userIdAttribute;
+		    }
+		}
+		%>
         
         <label for="amount">Amount:</label>
         <input type="number" name="amount" required>
+        
+        
         
         <button type="submit">Create Request</button>
     </form>
