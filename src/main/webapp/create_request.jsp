@@ -77,7 +77,7 @@
 <h1>Create Request</h1>
 
 <div class="container">
-    <form action="create_request" method="post">
+    <form action="create_request" method="post" id = "requestForm" onsubmit="return validateForm()">
         <label for="title">Title:</label>
         <input type="text" name="title" required>
         
@@ -116,13 +116,47 @@
 		%>
         
         <label for="amount">Amount:</label>
-        <input type="number" name="amount" required>
+        <input type="number" name="amount" required min="10000" max="1000000">
         
         
         
         <button type="submit">Create Request</button>
     </form>
 </div>
+
+<script>
+    function validateForm() {
+    	event.preventDefault();
+    	console.log("inside validate forms");
+    	// Get the values of the input fields
+        var title = document.getElementsByName("title")[0].value.trim();
+        
+        var description = document.getElementsByName("description")[0].value.trim();
+        
+        var amount = document.getElementsByName("amount")[0].value.trim();
+        var imgUrl = document.getElementsByName("img_url")[0].value.trim();
+
+        // Check if any of the fields are empty
+        if (title.length === 0 || description.length === 0 || amount.length === 0 || imgUrl.length === 0) {
+            alert("All fields are required.");
+            return false; // Prevent form submission
+        }
+
+        // Validate the "amount" field to ensure it's a positive number
+       // if (isNaN(amount) || parseFloat(amount) > 2500 || parseFloat(amount) <=1000000) {
+       //     alert("Amount must between 2500 to 1000000");
+         //   return false; // Prevent form submission
+        //	}
+        
+        let form = document.getElementById("requestForm");
+        form.submit();
+
+        // Continue with other form field validations here...
+
+        return true; // Allow form submission if all validations pass
+    }
+</script>
+
 
 </body>
 </html>

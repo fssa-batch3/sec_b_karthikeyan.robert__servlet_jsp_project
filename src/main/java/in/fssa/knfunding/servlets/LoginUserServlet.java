@@ -23,13 +23,13 @@ public class LoginUserServlet extends HttpServlet {
 		String password = request.getParameter("password");
 
 		User user = userService.findByEmail(email, password);
-		System.out.println(user);
 
 		if (user != null && user.getEmail().equals(email) && user.getPassword().equals(password)) {
 
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user);
 
+			System.out.println("login user " + request.getSession(false).getAttribute("user"));
 			response.sendRedirect(request.getContextPath() + "/Main_page.jsp");
 		} else {
 
@@ -38,6 +38,5 @@ public class LoginUserServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 		}
 	}
-	
-}
 
+}

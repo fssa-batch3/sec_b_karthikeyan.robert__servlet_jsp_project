@@ -105,7 +105,7 @@
                 <div class="content_F_B">
                     <div class="funded_backers">
                         <p style="margin:5px;">
-                            <b>RS.67000</b>
+                            <b>RS.0</b>
                         </p>
                         <p style="margin:5px;">
                             raised out of

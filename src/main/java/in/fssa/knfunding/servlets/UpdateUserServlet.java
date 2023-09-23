@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import exception.ValidationException;
 import in.fssa.knfunding.model.User;
@@ -37,6 +38,8 @@ public class UpdateUserServlet extends HttpServlet {
 
         try {
 			userService.update(updatedUser);
+			HttpSession session = request.getSession();
+			session.setAttribute("user", updatedUser);
 		} catch (ValidationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

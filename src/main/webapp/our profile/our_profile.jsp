@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<%@page import="in.fssa.knfunding.model.Donation"%>
+<%@page import="java.util.List"%>
+<%@page import="in.fssa.knfunding.service.DonationService"%>
 <%@page import="in.fssa.knfunding.model.User"%>
 <html lang="en">
     <head>
@@ -46,8 +49,6 @@
                		<%
 						User user = (User) session.getAttribute("user");
                		
-               			
-               			
 					%>
 
 		<div class="profile_name">
@@ -164,11 +165,20 @@
             </div>
             <div class="history_1">
                 <div class="column_1">
-                
+                <%
+			        DonationService donationService = new DonationService();
+					
+			        List<Donation> donationList = donationService.getDonationByUserId(user.getId());
+	
+			        // Limit the list to the last 10 donations
+			        int numDonationsToShow = Math.min(10, donationList.size());
+			        List<Donation> last10Donations = donationList.subList(0, numDonationsToShow);
+			        %>
                     <h3>LAST 10 PAYMENTS</h3>
                   
                 </div>
                 <div class="column_2">
+                
                     <table class="payment_list">
                         <tr class="listhead list_heading">
                             <th class="list_content">Campaign Title</th>
@@ -177,48 +187,22 @@
                             <th class="list_content">Date</th>
                         
                         </tr>
+                        <%
+				for (int i=donationList.size()-1; i>=0; i--) {
+					Donation donation = donationList.get(i);
+				%>
                         <tr class="list_heading">
-                            <td class="list_content"> temple & Culture </td>
-                            <td class="list_content name">ajun</td>
-                            <td class="list_content amount"> 20000 </td>
-                            <td class="list_content"> 11/05/2023 </td>
-                        
+                            <td class="list_content"> <%=donation.getRequestTitle()%></td>
+                            <td class="list_content name"><%=donation.getDonor_name()%> </td>
+                            <td class="list_content amount"> <%=donation.getDonation_amount()%>  </td>
+                            <td class="list_content"> <%=donation.getDonation_date()%> </td>
+         
                         </tr>  
-                        <tr class="list_heading">
-                            <td class="list_content"> Education welfar</td>
-                            <td class="list_content name"> tommy</td>
-                            <td class="list_content amount"> 30000 </td>
-                            <td class="list_content"> 01/05/2023</td>
-                        
-                        </tr>  
-                        <tr class="list_heading">
-                            <td class="list_content"> medical causes</td>
-                            <td class="list_content name"> sandy</td>
-                            <td class="list_content amount"> 40000 </td>
-                            <td class="list_content"> 21/04/2023</td>
-                        
-                        </tr>  
-                        <tr class="list_heading">
-                            <td class="list_content"> natural disaster </td>
-                            <td class="list_content name">anbu </td>
-                            <td class="list_content amount"> 20000 </td>
-                            <td class="list_content"> 19/04/2023</td>
-                        
-                        </tr>  
-                        <tr class="list_heading">
-                            <td class="list_content"> children welfar</td>
-                            <td class="list_content name"> mathi</td>
-                            <td class="list_content amount"> 10000 </td>
-                            <td class="list_content"> 11/04/2023</td>
-                        
-                        </tr>  
-                        <tr class="list_heading">
-                            <td class="list_content"> temple & culture</td>
-                            <td class="list_content name"> sr.vignesh</td>
-                            <td class="list_content amount"> 10000 </td>
-                            <td class="list_content"> 01/04/2023</td>
-                        
-                        </tr>  
+           <%
+		}
+		%>
+                         
+                 
                      
                     </table>
 

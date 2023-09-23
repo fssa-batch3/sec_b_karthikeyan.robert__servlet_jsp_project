@@ -240,7 +240,8 @@ header{
 }
 
 .donate_btn {
-
+	text-decoration: none;
+    
     background-color: TOMATO; 
     color: black; 
     border: 2px solid TOMATO;

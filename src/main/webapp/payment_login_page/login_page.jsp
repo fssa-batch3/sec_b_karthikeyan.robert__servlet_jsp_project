@@ -43,7 +43,7 @@
                 <a href="../../project/payment login page/Register_page.html" class="AboutUS">Register </a>
             </li> -->
             <li class="Login">
-                <a href="<%=request.getContextPath()%>/payment login page/login_page.html" class="login_register login_btn" id="">Login to start a fundraiser</a>
+                <a href="<%=request.getContextPath()%>/index.jsp" class="login_register login_btn" id="">Home</a>
             </li>
 
         </ul>
@@ -60,7 +60,7 @@
                     </div>
                     <div class="input">
                 
-                        <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="email" type="text" id="email" required="true" placeholder="Email id" class="input_1">
+                        <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="email" type="text" id="email" required="true" placeholder="Email id" class="input_1" required>
                  
                     </div>
                     
@@ -78,11 +78,11 @@
 
                     </div>
                             <%
-    String errorMessage = (String)request.getAttribute("errorMessage");
-    if(errorMessage != null){
-    	out.println(errorMessage);
-    }
-    %>
+						    String errorMessage = (String)request.getAttribute("errorMessage");
+						    if(errorMessage != null){
+						    	out.println(errorMessage);
+						    }
+						    %>
                     <div class="login_button_a">
                         <button type="submit" class="login_button_a"> LOGIN</button>    
                     </div>

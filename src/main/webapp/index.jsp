@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<%@page import="in.fssa.knfunding.model.Donation"%>
+<%@page import="in.fssa.knfunding.service.DonationService"%>
 <%@page import="in.fssa.knfunding.model.Request"%>
 <%@page import="java.util.List"%>
 <%@page import="in.fssa.knfunding.service.RequestService"%>
@@ -44,9 +46,10 @@
             <li class="Login login_register">
                <a class="AboutUS" href="#"> Contact us</a>
             </li>
-            <li class="Login login_register">
+          <!--   <li class="Login login_register">
                 <a href="<%=request.getContextPath()%>/payment_login_page/Register_page.jsp" class="AboutUS">Register </a>
             </li>
+            -->
             <li class="Login">
                 <a href="<%=request.getContextPath()%>/payment_login_page/login_page.jsp" class="login_register login_btn" id="">Login to start a fundraiser</a>
             </li>
@@ -86,62 +89,74 @@
    
     
 <%
-
-        for (Request request1 : requestList) {
-   
+for (int i=requestList.size()-1; i>=0; i--) {
+	Request request1 = requestList.get(i);
         	%>
              <div class="profiles">
-                <div class="profile_info">
-                    <div class="content">
-					    <img alt="post" name="img_url" class="profile-post"  style="width:100%;" src="<%= request1.getImg_url() %>">
-					    
-					</div>
-                    <div class="content">
-                        
+			<div class="profile_info">
+				<div class="content">
+					<img alt="post" name="img_url" class="profile-post"
+						style="width: 100%;" src="<%=request1.getImg_url()%>">
 
-                    </div>
-                    <div class="content_F_B">
-                        <div class="funded_backers">
-                        	<p style="margin:5px;"> 
-                        		<b>RS.67000</b>	
-                        		
-                        		<p style="margin:5px;">
-                        		 raised out of 
-                        		 </p>
-                        		
-                        		<p style="margin:5px;">
-                        		
-                        		<b>Rs.<%= request1.getAmount() %></b>
-                        		</p>
-                        		
-                        	</p>
-                        	
-                            
-                        </div>
-                       
-                    </div>
-                    <div class="content">
-                        <p>
-                            <b><%= request1.getTitle() %>
-                            </b>
-                        </p>
-                        <p>
-                           <%= request1.getDescription() %>
-                        </p>
-                    </div>
-                    <div>
-                        <button class="donate_btn">
-                            <lable>Donate</lable>
-                        </button>
-                    </div>
-                    </div>
-               
-                </div>
-            
-            
-        <%
-        }
-        %>
+				</div>
+				<div class="content">
+					<p>
+						<b><%=request1.getTitle()%> </b>
+					</p>
+					<p>
+						<%=request1.getDescription()%>
+					</p>
+				</div>
+				<div class="content"></div>
+				<div class="content_F_B">
+					<div class="funded_backers">
+						<% 
+						    int requestId = request1.getId(); 
+						    DonationService donationService = new DonationService();
+						    List<Donation> donationList = donationService.getDonationByRequestId(requestId);
+						  %><%  
+						    int totalAmount = 0;
+						    for (Donation donation : donationList) { %>
+					        
+					        <% totalAmount += donation.getDonation_amount(); %>
+					    <% } %>
+
+						<p style="margin: 5px;">
+						    <b>RS.<%= totalAmount %></b>
+						</p>
+													
+						<p style="margin: 5px;">raised out of</p>
+
+						<p style="margin: 5px;">
+
+							<b>Rs.<%=request1.getAmount()%></b>
+						</p>
+
+					</div>
+
+
+				</div>
+
+				<div>
+					<button class="donate_btn">
+						<a style="text-decoration: none; color: black;" href="<%=request.getContextPath()%>/payment_login_page/login_page.jsp">
+							Donate </a>
+					</button class="donate_btn">
+					
+				 	
+					
+				</div>
+			</div>
+			
+
+		</div>
+		
+
+
+		<%
+		}
+		%>
+
   
 
         </section>

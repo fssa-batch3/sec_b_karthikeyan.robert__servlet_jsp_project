@@ -22,6 +22,12 @@
   	<description></description>
   	<servlet-class>in.fssa.knfunding.servlets.LogoutUserServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>DonationServlet</servlet-name>
+  	<display-name>DonationServlet</display-name>
+  	<description></description>
+  	<servlet-class>in.fssa.knfunding.servlets.DonationServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>IndexServlet</servlet-name>
   	<url-pattern>/IndexServlet</url-pattern>
@@ -33,5 +39,9 @@
   <servlet-mapping>
   	<servlet-name>LogoutUserServlet</servlet-name>
   	<url-pattern>/LogoutUserServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>DonationServlet</servlet-name>
+  	<url-pattern>/DonationServlet</url-pattern>
   </servlet-mapping>
   </web-app>
