@@ -1,13 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/login_style.css">
+   <head>
+        <meta charset="UTF-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/style.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/login_style.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Rajdhani&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap" rel="stylesheet">
         <title>KN funding</title>
-        <link rel="icon" type="image/x-icon" href="<%=request.getContextPath()%>/assets/images/logo.png">
+        <link rel="icon" type="image/x-icon" href="<%=request.getContextPath()%>/assets/images/icon_logo.jpg">
+        
+        
+
     </head>
 
     <header>
@@ -15,16 +26,7 @@
             <img src="<%=request.getContextPath()%>/assets/images/logo.png" alt="image" class="logo"> 
         </a>
         <div class="search_input_logo">
-            <!-- <input class="search_box" placeholder="Search Campaigns & Petitions"></input>
-            <button class="search_button">
-                <img src="./project/assets/images/search_logo.png" alt="image"
-                    class="search_logo"></button> -->
-            <!-- <ul>
-                <li>About US</li>
-                <li>Contact US</li>
-
-            </ul>         -->
-
+            
         </div>
         <ul class="Login_Register">
             <li class="Login login_register dropdownn">
@@ -39,12 +41,11 @@
             <li class="Login login_register">
                <a class="AboutUS" href="#"> Contact us</a>
             </li>
-            <!-- <li class="Login login_register">
-                <a href="../../project/payment login page/Register_page.html" class="AboutUS">Register </a>
-            </li> -->
+          
             <li class="Login">
-                <a href="<%=request.getContextPath()%>/index.jsp" class="login_register login_btn" id="">Home</a>
-            </li>
+                               <a href="<%=request.getContextPath()%>/index.jsp" class="login_register login_btn" id="">Home</a>
+               
+               </li>
 
         </ul>
 

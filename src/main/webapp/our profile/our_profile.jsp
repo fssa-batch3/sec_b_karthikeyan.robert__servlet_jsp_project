@@ -15,36 +15,18 @@
     <header class="profile_head">
         <div class="header_1">
             <div>
-                <a href="<%=request.getContextPath()%>/Main_page.html">
+                <a href="<%=request.getContextPath()%>/Main_page.jsp">
                     <img src="<%=request.getContextPath()%>/assets/images/logo.png" alt="image" class="logo"> 
                 </a>
             </div>    
-            <!-- <div class="search_input_logo">
-                <input class="search_box" placeholder="Search Campaigns & Petitions"></input>
-                <button class="search_button">
-                    <img src="../assets/images/search_logo.png" alt="image" class="search_logo">
-                </button>
-            </div> -->
+            
             <div class="profile_logo">
                 <ul class="LoginRegister">
-                    <li class="Login login_register dropdownn">
-                      <a class="AboutUS" href="<%=request.getContextPath()%>/knfunding_details/AL_about_us.jsp" >  About us </a>
-                        <!-- <div class="dropdownn-content">
-                            <a href="../project/knfunding_details/AL_about_us.html">Who we are</a>
-                            <a href="../project/knfunding_details/AL_about_us.html">What we do</a>
-               
-                        </div> -->
-                    </li>
-                    <li class="Login login_register">
-                        Contact us
-                    </li>
-                        <!-- <li class="Login login_register">
-                            Register
-                        </li>
-                        <li class="Login">
-                            <a href="./project/payment login page/login_page.html" class="login_register" id="">Login</a>
-                        </li> -->
-            
+                    <li class="Login">
+                <a href="<%=request.getContextPath()%>/create_request.jsp" class="login_register login_btn" id="">Start a fundraiser</a>
+           		 </li>
+                    
+                      
                     </ul>
                		<%
 						User user = (User) session.getAttribute("user");
@@ -174,7 +156,7 @@
 			        int numDonationsToShow = Math.min(10, donationList.size());
 			        List<Donation> last10Donations = donationList.subList(0, numDonationsToShow);
 			        %>
-                    <h3>LAST 10 PAYMENTS</h3>
+                    <h3>RECENT PAYMENTS</h3>
                   
                 </div>
                 <div class="column_2">
@@ -247,9 +229,9 @@
                             <li>
                                 <h2>OUR POLICIES</h2>
                             </li>
-                            <li class="abus"><a href="<%=request.getContextPath()%>/knfunding_details/AL_terms_and_contition_page.html" class="aboutUS">Terms of Use</a></li>
-                            <li class="abus"><a href="<%=request.getContextPath()%>/knfunding_details/AL_privacy_policy.html" class="aboutUS">Privacy Policy</a></li>
-                            <li class="abus"><a href="<%=request.getContextPath()%>/knfunding_details/AL_verification.html" class="aboutUS">Verified Accounts</a></li>
+                            <li class="abus"><a href="<%=request.getContextPath()%>/knfunding_details/AL_terms_and_contition_page.jsp" class="aboutUS">Terms of Use</a></li>
+                            <li class="abus"><a href="<%=request.getContextPath()%>/knfunding_details/AL_privacy_policy.jsp" class="aboutUS">Privacy Policy</a></li>
+                            <li class="abus"><a href="<%=request.getContextPath()%>/knfunding_details/AL_verification.jsp" class="aboutUS">Verified Accounts</a></li>
                             
     
                         </ul>

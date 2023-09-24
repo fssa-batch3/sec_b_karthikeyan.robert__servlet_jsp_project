@@ -29,6 +29,8 @@ public class ListRequestByUserId extends HttpServlet {
             int userId = user.getId();
             List<Request> userRequests = requestService.getRequestsByUserId(userId);
             
+            
+            
             if (userRequests != null) {
                 request.setAttribute("userRequests", userRequests);
                 System.out.println(request.getAttribute("userRequests"));

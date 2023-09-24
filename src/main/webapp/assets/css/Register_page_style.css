@@ -43,15 +43,6 @@ header{
     padding:10px;
     color:tomato;
 }
-.login_register{
-    text-decoration: none;
-    margin-top: auto;
-    margin-bottom: 10px;
-    margin-right:30px;
-    font-size: x-large;
-    /* font-family: 'Rajdhani', sans-serif; */
-    color:tomato;
-}
 
 *{
     outline:none;

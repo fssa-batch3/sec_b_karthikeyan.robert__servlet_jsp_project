@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="java.util.ArrayList"%>
 <%@page import="in.fssa.knfunding.model.Donation"%>
 <%@page import="in.fssa.knfunding.service.DonationService"%>
 <%@page import="in.fssa.knfunding.model.Request"%>
@@ -46,10 +47,7 @@
             <li class="Login login_register">
                <a class="AboutUS" href="#"> Contact us</a>
             </li>
-          <!--   <li class="Login login_register">
-                <a href="<%=request.getContextPath()%>/payment_login_page/Register_page.jsp" class="AboutUS">Register </a>
-            </li>
-            -->
+          
             <li class="Login">
                 <a href="<%=request.getContextPath()%>/payment_login_page/login_page.jsp" class="login_register login_btn" id="">Login to start a fundraiser</a>
             </li>
@@ -80,82 +78,80 @@
             
         </section>
         <section class="people_profile">
-         <%
-        RequestService requestservice = new RequestService();
-        List<Request> requestList = requestservice.getAllRequests();
-    
+       <%
+    RequestService requestService = new RequestService();
+    List<Request> requestList;
 
-     %>
-   
-    
+    try {
+        requestList = requestService.getAllRequests();
+    } catch (Exception e) {
+        e.printStackTrace();
+        requestList = new ArrayList<>();
+    }
+%>
+
 <%
-for (int i=requestList.size()-1; i>=0; i--) {
-	Request request1 = requestList.get(i);
-        	%>
-             <div class="profiles">
-			<div class="profile_info">
-				<div class="content">
-					<img alt="post" name="img_url" class="profile-post"
-						style="width: 100%;" src="<%=request1.getImg_url()%>">
+    for (int i = requestList.size() - 1; i >= 0; i--) {
+        Request request1 = requestList.get(i);
+        int requestId = request1.getId();
+        DonationService donationService = new DonationService();
+        List<Donation> donationList = donationService.getDonationByRequestId(requestId);
+        int totalAmount = 0;
+        for (Donation donation : donationList) {
+            totalAmount += donation.getDonation_amount();
+        }
+%>
 
-				</div>
-				<div class="content">
-					<p>
-						<b><%=request1.getTitle()%> </b>
-					</p>
-					<p>
-						<%=request1.getDescription()%>
-					</p>
-				</div>
-				<div class="content"></div>
-				<div class="content_F_B">
-					<div class="funded_backers">
-						<% 
-						    int requestId = request1.getId(); 
-						    DonationService donationService = new DonationService();
-						    List<Donation> donationList = donationService.getDonationByRequestId(requestId);
-						  %><%  
-						    int totalAmount = 0;
-						    for (Donation donation : donationList) { %>
-					        
-					        <% totalAmount += donation.getDonation_amount(); %>
-					    <% } %>
+<div class="profiles">
+    <div class="profile_info">
+        <div class="content">
+            <img alt="post" name="img_url" class="profile-post" style="width: 100%;" src="<%=request1.getImg_url()%>">
+        </div>
+       <!--  <div class="content_F_B">
+            
+        </div>
+        -->
+         <div class="content">
+         
+            <div class="progress-bar">
+                <div class="progress" id="progress<%= requestId %>"></div> 
+            </div>
+            <div class="funded_backers">
+                <p style="margin: 5px;">
+                    <b>RS.<%= totalAmount %></b>
+                </p>
+                <p style="margin: 5px;">raised out of</p>
+                <p style="margin: 5px;">
+                    <b>Rs.<%=request1.getAmount()%></b>
+                </p>
+            </div>
+        </div>
+        
+        <div class="content">
+            <p style="border-bottom: 1px solid gray; margin-bottom:10px; " >
+                 <b>Catergory : <%=request1.getCategory_name() %></b>
+            </p>
+            <p>
+                <b><%=request1.getTitle()%></b>
+            </p>
+            <p>
+                <%=request1.getDescription()%>
+            </p>
+        </div>
+       
+        <div>
+            <button class="donate_btn">
+                <a style="text-decoration: none; color: black;"
+                   href="<%=request.getContextPath()%>/payment_login_page/login_page.jsp">
+                    Donate
+                </a>
+            </button>
+        </div>
+    </div>
+</div>
 
-						<p style="margin: 5px;">
-						    <b>RS.<%= totalAmount %></b>
-						</p>
-													
-						<p style="margin: 5px;">raised out of</p>
+<% } %>
 
-						<p style="margin: 5px;">
-
-							<b>Rs.<%=request1.getAmount()%></b>
-						</p>
-
-					</div>
-
-
-				</div>
-
-				<div>
-					<button class="donate_btn">
-						<a style="text-decoration: none; color: black;" href="<%=request.getContextPath()%>/payment_login_page/login_page.jsp">
-							Donate </a>
-					</button class="donate_btn">
-					
-				 	
-					
-				</div>
-			</div>
-			
-
-		</div>
-		
-
-
-		<%
-		}
-		%>
 
   
 

@@ -5,8 +5,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Create Request</title>
+    
+<title>KN funding</title>
+<link rel="icon" type="image/x-icon"
+	href="<%=request.getContextPath()%>/assets/images/icon_logo.jpg">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/Main_page_style.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/style.css"> 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap"
+	rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -71,7 +82,44 @@
             background-color: #0056b3;
         }
     </style>
-</head>
+</head><header>
+	<a href="<%=request.getContextPath()%>/Main_page.jsp"> <img
+		src="<%=request.getContextPath()%>/assets/images/logo.png" alt="image"
+		class="logo">
+	</a>
+	
+	<div class="profile_logo">
+		<ul class="LoginRegister">
+			 <li class="Login">
+                <a href="<%=request.getContextPath()%>/Main_page.jsp" class="login_register login_btn" id="">Home</a>
+           		 </li>
+		</ul>
+		<%
+		User user = (User) session.getAttribute("user");
+		%>
+
+
+		<div class="profile_name">
+			<!-- KARTHIKEYAN -->
+			<%=user.getFullName()%>
+		</div>
+
+		<div class="logo_profile">
+			<div class="dropdown">
+				<img src="<%=request.getContextPath()%>/assets/images/user.png"
+					alt="image" class="user_logo">
+				<div class="dropdown-content">
+					<a href="<%=request.getContextPath()%>/our profile/our_profile.jsp">profile</a>
+					<a href="<%=request.getContextPath()%>/logout">Log Out</a>
+
+				</div>
+			</div>
+		</div>
+		<!-- </a> -->
+
+	</div>
+
+</header>
 <body>
 
 <h1>Create Request</h1>
@@ -123,7 +171,101 @@
         <button type="submit">Create Request</button>
     </form>
 </div>
+<footer class="footer">
 
+		<section class="footer_section1">
+			<div class="con_info">
+				<img
+					src="<%=request.getContextPath()%>/assets/images/footer_logo.png"
+					alt="image" class="footer_logo">
+
+
+
+				<div class="footer_contact">
+					<ul class="footer_contact_list">
+						<li>
+							<h2>CONTACT INFO</h2>
+						</li>
+						<li>Global Infocity, St, Kodandarama Nagar, Perungudi,
+							Chennai, Tamil Nadu, 600041.</li>
+						<li>+91 7010847986</li>
+						<li>karthikeyan.robert@fssa.freshworks.com</li>
+
+					</ul>
+
+				</div>
+				<div class="footer_contact">
+					<ul class="footer_contact_list">
+						<li>
+							<h2>GET STARTED</h2>
+						</li>
+						<li class="abus"><a
+							href="<%=request.getContextPath()%>/knfunding_details/AL_about_us.jsp"
+							class="aboutUS">About us</a></li>
+						<li class="abus"><a href="#" class="aboutUS">How It Works</a></li>
+
+
+					</ul>
+				</div>
+				<div class="footer_contact">
+					<ul class="footer_contact_list">
+						<li>
+							<h2>OUR POLICIES</h2>
+						</li>
+						<li class="abus"><a
+							href="<%=request.getContextPath()%>/knfunding_details/AL_terms_and_contition_page.jsp"
+							class="aboutUS">Terms of Use</a></li>
+						<li class="abus"><a
+							href="<%=request.getContextPath()%>/knfunding_details/AL_privacy_policy.jsp"
+							class="aboutUS">Privacy Policy</a></li>
+						<li class="abus"><a
+							href="<%=request.getContextPath()%>/knfunding_details/AL_verification.jsp"
+							class="aboutUS">Verified Accounts</a></li>
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contact">
+
+				<a href="https://www.instagram.com/karthi_kn_offl/"
+					class="instagram_fb"> <img
+					src="<%=request.getContextPath()%>/assets/images/instagram.png"
+					alt="image" height="40px" width="50px">
+				</a> <a href="https://www.facebook.com/profile.php?id=100057753970924"
+					class="instagram_fb"> <img
+					src="<%=request.getContextPath()%>/assets/images/facebook.png"
+					alt="image" height="40px" width="50px">
+				</a> <a href="https://www.linkedin.com/in/karthi-keyan-b01438254/"
+					class="instagram_fb"> <img
+					src="<%=request.getContextPath()%>/assets/images/linkedin.png"
+					alt="image" height="42px" width="50px">
+				</a>
+
+			</div>
+			<!-- </section>
+            <section class="footer_section2"> -->
+			<div class="copyrights">
+				<b> KN FUNDING is a Registered Trademark. © 2022 KN FUNDING.
+					All Rights Reserved. Made by karthikeyan with 💗 </b>
+			</div>
+			<div class="Disclaimer">
+				<b>Disclaimer:</b> Please note that contributing through KN funding
+				will not always be a tax exempt charitable donation. KN funding does
+				not guarantee that your Fundraisers will be fully or partially
+				funded nor does it guarantee that the petitions will achieve all
+				their goals. KN funding is an internet platform to connect
+				individuals, non-profits and contributors to collaborate on the
+				published campaigns & petitions. KN funding does not take any
+				responsibility for any promises made by campaign owners,
+				petitioners, community members & creators on its platform. Please
+				read the Terms of Use & Privacy Policy prior performing any
+				transactions on our platform.
+			</div>
+		</section>
+
+	</footer>
+	
 <script>
     function validateForm() {
     	event.preventDefault();

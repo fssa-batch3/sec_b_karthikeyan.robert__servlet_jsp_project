@@ -12,9 +12,9 @@
 <link rel="icon" type="image/x-icon"
 	href="<%=request.getContextPath()%>/assets/images/icon_logo.jpg">
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>//assets/css/Main_page_style.css">
+	href="<%=request.getContextPath()%>/assets/css/Main_page_style.css">
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>//assets/css/style.css">
+	href="<%=request.getContextPath()%>/assets/css/style.css"> 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
@@ -127,29 +127,12 @@
 		src="<%=request.getContextPath()%>/assets/images/logo.png" alt="image"
 		class="logo">
 	</a>
-	<div class="search_input_logo">
-		<!-- <input class="search_box" placeholder="Search Campaigns & Petitions"></input>
-            <button class="search_button">
-                <img src="./assets/images/search_logo.png" alt="image" class="search_logo">
-            </button> -->
-	</div>
+	
 	<div class="profile_logo">
 		<ul class="LoginRegister">
-			<li class="Login login_register dropdownn"><a class="AboutUS"
-				href="<%=request.getContextPath()%>/knfunding_details/AL_about_us.jsp">
-					About us </a> <!-- <div class="dropdownn-content">
-                    <a href="../project/knfunding_details/AL_about_us.html">Who we are</a>
-                    <a href="../project/knfunding_details/AL_about_us.html">What we do</a>
-       
-                </div> --></li>
-			<li class="Login login_register">Contact us</li>
-			<!-- <li class="Login login_register">
-                    Register
-                </li>
-                <li class="Login">
-                    <a href="./project/payment login page/login_page.html" class="login_register" id="">Login</a>
-                </li> -->
-
+			 <li class="Login">
+                <a href="<%=request.getContextPath()%>/create_request.jsp" class="login_register login_btn" id="">Start a fundraiser</a>
+           		 </li>
 		</ul>
 		<%
 		User user = (User) session.getAttribute("user");
@@ -201,105 +184,78 @@
 	</section>
 	<section class="people_profile">
 		<%
-		//RequestService requestservice = new RequestService();
-		//List<Request> requestList = requestservice.getAllRequests();
-		 RequestService requestService = new RequestService();
-   			 List<Request> requestList;
+    RequestService requestService = new RequestService();
+    List<Request> requestList;
 
     try {
         requestList = requestService.getAllRequests();
     } catch (Exception e) {
-        // Handle exceptions here, e.g., log the error or display an error message
-        e.printStackTrace(); // This is for debugging purposes, you can replace it with proper error handling.
-        requestList = new ArrayList<>(); // Initialize an empty list to avoid null reference issues.
+        e.printStackTrace();
+        requestList = new ArrayList<>();
     }
-		
-		%>
+%>
 
+<%
+    for (int i = requestList.size() - 1; i >= 0; i--) {
+        Request request1 = requestList.get(i);
+        int requestId = request1.getId();
+        DonationService donationService = new DonationService();
+        List<Donation> donationList = donationService.getDonationByRequestId(requestId);
+        int totalAmount = 0;
+        for (Donation donation : donationList) {
+            totalAmount += donation.getDonation_amount();
+        }
+%>
 
-		<%
-	       
-					for (int i=requestList.size()-1; i>=0; i--) {
-						Request request1 = requestList.get(i);
-						int mk=i;
-		%>
-		
-		<div class="profiles">
-			<div class="profile_info">
-				<div class="content">
-					<img alt="post" name="img_url" class="profile-post"
-						style="width: 100%;" src="<%=request1.getImg_url()%>">
+<div class="profiles">
+    <div class="profile_info">
+        <div class="content">
+            <img alt="post" name="img_url" class="profile-post" style="width: 100%;" src="<%=request1.getImg_url()%>">
+        </div>
+       <!--  <div class="content_F_B">
+            
+        </div>
+        -->
+         <div class="content">
+         
+            <div class="progress-bar">
+                <div class="progress" id="progress<%= requestId %>"></div> 
+            </div>
+            <div class="funded_backers">
+                <p style="margin: 5px;">
+                    <b>RS.<%= totalAmount %></b>
+                </p>
+                <p style="margin: 5px;">raised out of</p>
+                <p style="margin: 5px;">
+                    <b>Rs.<%=request1.getAmount()%></b>
+                </p>
+            </div>
+        </div>
+        
+        <div class="content">
+            <p style="border-bottom: 1px solid gray; margin-bottom:10px; " >
+                 <b>Catergory : <%=request1.getCategory_name() %></b>
+            </p>
+            <p>
+                <b><%=request1.getTitle()%></b>
+            </p>
+            <p>
+                <%=request1.getDescription()%>
+            </p>
+        </div>
+       
+        <div>
+            <button class="donate_btn">
+                <a style="text-decoration: none; color: black;"
+                   href="<%=request.getContextPath()%>/Donation_payment.jsp?id=<%=request1.getId()%>">
+                    Donate
+                </a>
+            </button>
+        </div>
+    </div>
+</div>
 
-				</div>
-				<div class="content">
-				<p style=" border-bottom: 1px solid gray; margin-top: 50px;" >
-					<b><%=request1.getCategory_name() %> </b>
-				</p>
-					<p>
-						<b><%=request1.getTitle()%> </b>
-					</p>
-					<p>
-						<%=request1.getDescription()%>
-					</p>
-				</div>
-				<div class="content">
-						<div class="progress-bar">
-				        <div class="progress<%=mk%>"></div>
-				    </div>
-								
-				</div>
-				<div class="content_F_B">
-					<div class="funded_backers">
-					<% 	
-					
-						    int requestId = request1.getId(); 
-						    DonationService donationService = new DonationService();
-						    List<Donation> donationList = donationService.getDonationByRequestId(requestId);
-						  %><%  
-						    int totalAmount = 0;
-						    for (Donation donation : donationList) { %>
-					        
-					        <% totalAmount += donation.getDonation_amount(); %>
-					    <% } %>
-
-						<p style="margin: 5px;">
-						    <b>RS.<%= totalAmount %></b>
-						</p>
-													
-						<p style="margin: 5px;">raised out of</p>
-
-						<p style="margin: 5px;">
-
-							<b>Rs.<%=request1.getAmount()%></b>
-						</p>
-
-
-
-					</div>
-
-
-				</div>
-
-				<div>
-					<button class="donate_btn">
-						<a style="text-decoration: none; color: black;"
- href="<%=request.getContextPath()%>/Donation_payment.jsp?id=<%=request1.getId()%>">
-							Donate </a>
-					</button class="donate_btn">
-					
-				 	
-					
-				</div>
-			</div>
-			
-
-		</div>
-		
-
-
-		<%
-		}
-		%>
+<% } %>
 
 
 	</section>
@@ -511,174 +467,38 @@
 	<script>
 	
 		//progeressBar 
-		
-		 function updateProgressBar(totalAmount, targetAmount,mk) {
-        const progress = (totalAmount / targetAmount) * 100;
-        const progressBar = document.querySelector(`.progress${mk}`);
+		<%
+    for (int i = requestList.size() - 1; i >= 0; i--) {
+        Request request1 = requestList.get(i);
+        int requestId = request1.getId();
+        DonationService donationService = new DonationService();
+        List<Donation> donationList = donationService.getDonationByRequestId(requestId);
+        int totalAmount = 0;
+        for (Donation donation : donationList) {
+            totalAmount += donation.getDonation_amount();
+        }
+    %>
 
+    let totalAmount<%= requestId %> = <%= totalAmount %>;
+    let targetAmount<%= requestId %> = <%= request1.getAmount() %>;
+    updateProgressBar(totalAmount<%= requestId %>, targetAmount<%= requestId %>, <%= requestId %>);
+
+    function updateProgressBar(totalAmount, targetAmount, requestId) {
+        const progress = (totalAmount / targetAmount) * 100;
+        const progressBar = document.querySelector('#progress<%= requestId %>');
         if (progressBar) {
-        	progressBar.style.color="green";
             progressBar.style.width = progress + '%';
+            progressBar.innerText = Math.floor(progress) + '%';
+            if (progress > 70 && progress < 99) {
+                progressBar.style.backgroundColor = 'green';
+            } else {
+                progressBar.style.backgroundColor = 'tomato';
+            }
         }
     }
+    <% } %>
 
-		 <% 
-		 int totalAmount = 0;
-		 Request request1 = null;
-		 for (int i=requestList.size()-1; i>=0; i--) {
-			 request1 = requestList.get(i);
-		    int requestId = request1.getId(); 
-		    DonationService donationService = new DonationService();
-		    List<Donation> donationList = donationService.getDonationByRequestId(requestId);
-		  %><%  
-		    
-		    for (Donation donation : donationList) { %>
-	        
-	        <% totalAmount += donation.getDonation_amount(); %>
-	    <% }} %>
 		
-    let totalAmount = <%= totalAmount %>; 
-    console.log(totalAmount);
-    let targetAmount = <%=request1.getAmount()%>; 
-
-    for(let i = <%=requestList.size()-1%>; i>=0 ;i--){
-    updateProgressBar(totalAmount, targetAmount,i);
-    }
-		//user name
-
-		//      const userId = JSON.parse(localStorage.getItem("userId"));
-		//      const user_list = JSON.parse(localStorage.getItem("user_list"));
-
-		//     function login_data(e) {
-		//       return e.number == userId;
-		//    }
-		//     user_data = user_list.find(login_data);
-		//     document.querySelector("#user_name").innerText = user_data.name;
-
-		// request cards
-
-		//   const show_cart = JSON.parse(localStorage.getItem("Request_list"));
-
-		//  console.log(show_cart);
-
-		//  div_profiles_row_one = document.createElement("div");
-		//  div_profiles_row_one.setAttribute("class", "profiles_row_one");
-		//  console.log(div_profiles_row_one);
-		//   document.querySelector("section.people_profile").append(div_profiles_row_one);
-
-		//   for (i = 0; i < show_cart.length; i++) {
-		// div_profiles = document.createElement("div");
-		//div_profiles.setAttribute("class", "profiles");
-		// div_profiles_row_one.append(div_profiles);
-
-		// a_profile_info = document.createElement("a");
-		//a_profile_info.setAttribute("class", "profile_info");
-		//a_profile_info.setAttribute("href",`../project/After_login_pages/after_login_inside_profile/AL_inside_profile_1.html?puid=${show_cart[i].uuid}`);
-		//   div_profiles.append(a_profile_info);
-
-		// div_content_1 = document.createElement("div");
-		//  div_content_1.setAttribute("class", "content");
-		//  a_profile_info.append(div_content_1);
-
-		//  img = document.createElement("img");
-		//  img.setAttribute("src", show_cart[i]["Featured Image"]);
-		// img.setAttribute("alt", "image");
-		//  img.setAttribute("width", "300px");
-		// img.setAttribute("height", "200px");
-		//  div_content_1.append(img);
-
-		//  div_progressa = document.createElement("div");
-		//  div_progressa.setAttribute("class", "progressa");
-		//  div_profiles.append(div_progressa);
-
-		//   const donar_deatils=JSON.parse(localStorage.getItem("donar_deatils"));
-		//   let find_donate=donar_deatils.filter((e)=>e.DonateForId===show_cart[i].uuid);
-		//    let colected=0;
-		//       if(find_donate.length!==0){
-		//   for(let j=0;j<find_donate.length;j++){
-		//      colected+=find_donate[j].totalAmount;
-		//  }
-		//  }
-		//  let percentage=Math.floor(colected/show_cart[i].Goal*100);
-
-		//    div_progressab = document.createElement("div");
-		//    div_progressab.setAttribute("class", "progressab");
-		//     div_progressab.innerText=percentage+"%";
-		//    div_progressab.setAttribute("style", `background-color: tomato;`);
-		//    div_progressa.append(div_progressab);
-
-		//   div_progressab.style.width = `${percentage}%`;
-		//   if (percentage > 90 && percentage <= 100) {
-		//      div_progressab.style.backgroundColor = "green";
-		//      } else if (percentage > 1 && percentage < 90) {
-		//         div_progressab.style.backgroundColor = "tomato";
-		//    }
-
-		//    div_content_F_B = document.createElement("div");
-		//   div_content_F_B.setAttribute("class", "content_F_B");
-		//   div_profiles.append(div_content_F_B);
-
-		//  div_funded_backers_1 = document.createElement("div");
-		//   div_funded_backers_1.setAttribute("class", "funded_backers");
-		//   div_content_F_B.append(div_funded_backers_1);
-
-		//   div_para_funded = document.createElement("p");
-		//   div_para_funded.innerText = "FUNDED";
-		//   div_funded_backers_1.append(div_para_funded);
-
-		//    div_funded_amount = document.createElement("p");
-		//    div_funded_amount.innerText = "â¹"+colected ;
-		//    div_funded_backers_1.append(div_funded_amount);
-
-		//    div_persentage = document.createElement("div");
-		//    div_persentage.setAttribute("class", "persentage");
-		//    div_content_F_B.append(div_persentage);
-
-		//    h1_persentage_space = document.createElement("h1");
-		//   h1_persentage_space.setAttribute("class", "persentage_space");
-		//    h1_persentage_space.innerText = percentage+"%";
-		//   div_persentage.append(h1_persentage_space);
-
-		//     div_funded_backers_2 = document.createElement("div");
-		//      div_funded_backers_2.setAttribute("class", "funded_backers");
-		//     div_content_F_B.append(div_funded_backers_2);
-
-		//     div_para_backers = document.createElement("p");
-		//     div_para_backers.innerText = "BACKERS";
-		//     div_funded_backers_2.append(div_para_backers);
-
-		//     div_para_backers_amt = document.createElement("p");
-		//     div_para_backers_amt.innerText = find_donate.length;
-		//     div_funded_backers_2.append(div_para_backers_amt);
-
-		//      div_content_2 = document.createElement("div");
-		//      div_content_2.setAttribute("class", "content");
-		//     div_profiles.append(div_content_2);
-
-		//     p_para = document.createElement("p");
-		//    div_content_2.append(p_para);
-
-		//    b_bold = document.createElement("b");
-		//   b_bold.innerText = show_cart[i].title;
-		//    p_para.append(b_bold);
-
-		//   p = document.createElement("p");
-		//    p.innerText = show_cart[i].shortdecp;
-		//    div_content_2.append(p);
-
-		//   div_DAYS_left = document.createElement("div");
-		//   div_DAYS_left.setAttribute("class", "DAYS_left");
-		//  div_profiles.append(div_DAYS_left);
-
-		//   a_donate_btn = document.createElement("a");
-		//   a_donate_btn.setAttribute("href",`../project/After_login_pages/after_login_inside_profile/AL_inside_profile_1.html?puid=${show_cart[i].uuid}`);
-		//    div_DAYS_left.append(a_donate_btn);
-
-		//   donate_btn = document.createElement("button");
-		//   donate_btn.innerText = "DONATE";
-		//   donate_btn.setAttribute("class", "donate_btn");
-		//  a_donate_btn.append(donate_btn);
-		// }
 		//progressBAR
 
 		// let goal_amt = document.getElementById("goal").innerText;
