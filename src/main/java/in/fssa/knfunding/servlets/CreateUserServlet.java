@@ -14,6 +14,10 @@ import in.fssa.knfunding.service.UserService;
 
 @WebServlet("/createUser")
 public class CreateUserServlet extends HttpServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private UserService userService = new UserService();
 
 	@Override
@@ -42,9 +46,12 @@ public class CreateUserServlet extends HttpServlet {
                 
                 userService.create(newUser); 
                 
-                RequestDispatcher dis =  request.getRequestDispatcher("/payment_login_page/login_page.jsp");
+                response.getWriter().print("<script>alert('Account Created Successfully');");
+    			response.getWriter().print("window.location.href=\"" + request.getContextPath()+ "/payment_login_page/login_page.jsp\"");
+    			response.getWriter().print("</script>");
+//                RequestDispatcher dis =  request.getRequestDispatcher("/payment_login_page/login_page.jsp");
                 											
-                dis.forward(request, response);
+//                dis.forward(request, response);
             } 
         } catch (Exception e) {
             e.printStackTrace();

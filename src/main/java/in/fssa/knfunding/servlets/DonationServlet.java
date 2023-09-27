@@ -1,6 +1,7 @@
 package in.fssa.knfunding.servlets;
 
 import java.io.IOException;
+
 import java.time.LocalDate;
 
 import javax.servlet.ServletException;
@@ -11,9 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import in.fssa.knfunding.model.Donation;
-import in.fssa.knfunding.model.Request;
 import in.fssa.knfunding.model.User;
 import in.fssa.knfunding.service.DonationService;
+
 
 @WebServlet("/Donate")
 public class DonationServlet extends HttpServlet {
@@ -29,11 +30,10 @@ public class DonationServlet extends HttpServlet {
 
 			if (user != null) {
 				int userId = user.getId();
-				System.out.println(request.getAttribute("requestId"));
 //				int requestId = Integer.parseInt((String) request.getAttribute("requestId"));
 				String name = request.getParameter("donorName");
 				String email = request.getParameter("email");
-				int id = Integer.parseInt((String)request.getParameter("id"));
+				int id = Integer.parseInt((String) request.getParameter("id"));
 				System.out.println(id);
 				String mobile_no = request.getParameter("mobile_no");
 				int donation_amount = Integer.parseInt(request.getParameter("donation_amount"));
@@ -52,7 +52,10 @@ public class DonationServlet extends HttpServlet {
 				DonationService donationService = new DonationService();
 				donationService.createDonation(newDonation);
 
-				response.sendRedirect(request.getContextPath() + "/Main_page.jsp");
+				//response.sendRedirect(request.getContextPath() + "/Main_page.jsp");
+				response.getWriter().print("<script>alert('Successfully Donated');");
+				response.getWriter().print("window.location.href=\"" + request.getContextPath()+ "/MainPage\"");
+				response.getWriter().print("</script>");
 			} else {
 				// Handle the case when 'user' or 'request1' is null
 				// Redirect to a login page or display an error message

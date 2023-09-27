@@ -124,9 +124,10 @@
                 <a href="<%=request.getContextPath()%>/user_requests" class=" profile_head_2">
                     <li> <b>MY CAMPAIGNS</b></li>
                 </a>
-                <a href="#" class=" profile_head_2">
+               <!--  <a href="#" class=" profile_head_2">
                     <li><b> WITHDRAW AMOUNT </b></li> 
                 </a>
+                -->
     
             </ul>
         </div>  

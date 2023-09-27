@@ -10,13 +10,20 @@ import in.fssa.knfunding.service.UserService;
 
 @WebServlet("/deleteUser")
 public class DeleteUserServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
     	int userId = Integer.parseInt(request.getParameter("id"));
 
         UserService userService = new UserService();
         userService.delete(userId);
 
-        response.sendRedirect("index.jsp"); 
+        response.getWriter().print("<script>alert('Account has been Deleted');");
+		response.getWriter().print("window.location.href=\"" + request.getContextPath()+ "/index.jsp\"");
+		response.getWriter().print("</script>");
     }
 }

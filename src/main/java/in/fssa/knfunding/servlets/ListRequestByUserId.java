@@ -33,10 +33,10 @@ public class ListRequestByUserId extends HttpServlet {
             
             if (userRequests != null) {
                 request.setAttribute("userRequests", userRequests);
-                System.out.println(request.getAttribute("userRequests"));
                 RequestDispatcher dispatcher = request.getRequestDispatcher("our profile/my_campaigns.jsp");
                 dispatcher.forward(request, response);
             } 
+            
         } catch (Exception e) {
             e.printStackTrace();
         }

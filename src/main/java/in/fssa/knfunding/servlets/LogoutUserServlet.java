@@ -20,7 +20,10 @@ public class LogoutUserServlet extends HttpServlet {
 		request.getSession().removeAttribute("user");
 		request.getSession().invalidate();
 		
-		response.sendRedirect(request.getContextPath()+"/index.jsp");
+//		response.sendRedirect(request.getContextPath()+"/IndexServlet");
+		response.getWriter().print("<script>alert('Logout Successfully');");
+		response.getWriter().print("window.location.href=\"" + request.getContextPath()+ "/IndexServlet\"");
+		response.getWriter().print("</script>");
 		
 	}
 

@@ -1,11 +1,11 @@
 class User {
-    firstName
-    lastName
+    fullname
+    
     email
     phoneNumber
     password
 
-    validateFirstName(firstName) {
+    validateFirstName(fullname) {
         const pattern = new RegExp(/^[a-z]+$/)
         return pattern.test(firstName)   // returns true/false
     }
@@ -36,8 +36,8 @@ class User {
 
 const _firstName = "karthi"
 const _lastName = "keyan"
-const _email = "karthi@gmail.com"
-const _phoneNumber = "9876543211"
+const _email = "karthikn352004@gmail.com"
+const _phoneNumber = "7010847986"
 const _password = "karthikeyan"
 
 

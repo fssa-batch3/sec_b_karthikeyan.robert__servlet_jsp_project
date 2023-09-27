@@ -241,7 +241,7 @@
         <br>
         
         <label>Amount:</label>
-        <input type="number" value="<%= requestDetails.getAmount() %>" name="amount" required>
+        <input type="number" value="<%= requestDetails.getAmount() %>" name="amount" required readonly>
         
         <button type="submit">Save</button>
     </form>

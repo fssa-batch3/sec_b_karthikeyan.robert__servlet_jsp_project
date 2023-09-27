@@ -17,12 +17,17 @@
         <title>KN funding</title>
         <link rel="icon" type="image/x-icon" href="<%=request.getContextPath()%>/assets/images/icon_logo.jpg">
         
-        
+        <style>
+	.error{
+		color:red;
+	}	
+	
+	</style>
 
     </head>
 
     <header>
-        <a href="<%=request.getContextPath()%>/index.jsp">
+        <a href="<%=request.getContextPath()%>/IndexServlet">
             <img src="<%=request.getContextPath()%>/assets/images/logo.png" alt="image" class="logo"> 
         </a>
         <div class="search_input_logo">
@@ -43,7 +48,7 @@
             </li>
           
             <li class="Login">
-                               <a href="<%=request.getContextPath()%>/index.jsp" class="login_register login_btn" id="">Home</a>
+                               <a href="<%=request.getContextPath()%>/IndexServlet" class="login_register login_btn" id="">Home</a>
                
                </li>
 
@@ -55,14 +60,14 @@
     
         <section class="section_right_left">
             <div class="login_left login_or_register">
-                <form action="<%=request.getContextPath()%>/Login" role="form" method="post">
+                <form action="<%=request.getContextPath()%>/Login" role="form" method="post" onsubmit="return validateForm()">
                     <div class="title">
                         <h1 class="title_h1">LOG IN</h1>
                     </div>
                     <div class="input">
                 
-                        <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="email" type="text" id="email" required="true" placeholder="Email id" class="input_1" required>
-                 
+                        <input pattern="[a-z0-9._%+-]+@[gmail]+\.[com]{3,}$" name="email" type="text" id="email" required="true" placeholder="Email id" class="input_1" required>
+                 		
                     </div>
                     
                     <div class="input">
@@ -190,7 +195,23 @@
         </footer>
         </section>
     
-        <script src="<%=request.getContextPath()%>/assets/script.js"></script>
+        <script >
+        
+        function validateForm() {
+        const emailInput = document.getElementById("email");
+        const emailError = document.getElementById("emailError");
+        
+        const emailRegex = /^[a-z0-9._%+-]+@[gmail]+\.[com]{3,}$/;
+        
+        if (!emailRegex.test(emailInput.value)) {
+            emailError.textContent = "*Invalid email";
+            valid = false;
+        } else {
+            emailError.textContent = "";
+        }
+        }
+        
+        </script>
 
     </body>
 

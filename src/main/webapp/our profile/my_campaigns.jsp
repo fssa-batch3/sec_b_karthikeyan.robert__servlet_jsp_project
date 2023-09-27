@@ -53,7 +53,7 @@
     <header class="profile_head">
         <div class="header_1">
             <div>
-                <a href="<%=request.getContextPath()%>/Main_page.html">
+                <a href="<%=request.getContextPath()%>/MainPage">
                     <img src="<%=request.getContextPath()%>/assets/images/logo.png" alt="image" class="logo"> 
                 </a>
             </div>    
@@ -70,10 +70,12 @@
 						User user = (User) session.getAttribute("user");
                		
 					%>
-
+	
 		<div class="profile_name">
 			<!-- KARTHIKEYAN -->
 			<%=user.getFullName()%>
+			
+	 	
 		</div>
                 <!-- <a href="./our profile/our_profile.html"> -->
                 <div class="logo_profile">
@@ -105,9 +107,7 @@
                 <a href="<%=request.getContextPath()%>/user_requests" class=" profile_head_2">
                     <li> <b>MY CAMPAIGNS</b></li>
                 </a>
-                <a href="#" class=" profile_head_2">
-                    <li><b> WITHDRAW AMOUNT </b></li> 
-                </a>
+               
     
             </ul>
         </div>  
@@ -124,28 +124,31 @@
 		       <section class="people_profile">
     
    
-    <table>
+    <!-- Existing HTML and JSP code above -->
+
+<table>
     <tr>
-        
         <th>Title</th>
         <th>Description</th>
         <th>Category</th>
         <th>Received Amount</th>
         <th>Amount</th>
         <th>Edit</th>
-        <th>Delete</th>	
+       
     </tr>
     <%
     List<Request> userRequests = (List<Request>) request.getAttribute("userRequests");
 
-    // Loop through the userRequests in reverse order
-    for (int i = userRequests.size() - 1; i >= 0; i--) {
-        Request request1 = userRequests.get(i);
-        
-        // Rest of your code here
-%>
     
-   
+    if (userRequests != null) {
+        
+        for (int i = userRequests.size() - 1; i >= 0; i--) {
+            Request request1 = userRequests.get(i);
+
+            
+
+    %>
+    
     <tr>
     <%
     
@@ -156,32 +159,40 @@
         for (Donation donation : donationList) {
             totalAmount += donation.getDonation_amount();
         }
-%>
+    %>
         
         <td><%= request1.getTitle() %></td>
         <td><%= request1.getDescription() %></td>
-        <td><%=request1.getCategory_name() %></td>
+        <td><%= request1.getCategory_name() %></td>
         <td><%= totalAmount %></td>
         <td><%= request1.getAmount() %></td>
         
-        
         <td class="edit">
-        	<button class="edit" style="background-color: tomato;border: tomato;width: 100px;height: 30px;">
-        	<a href="request/edit?id=<%= request1.getId() %>" style="text-decoration: none;color: black;font-size: 1pc;font-weight: bold;">Edit</a>
-        	
-        </button>
+            <button class="edit" style="background-color: tomato; border: tomato; width: 100px; height: 30px;">
+                <a href="request/edit?id=<%= request1.getId() %>" style="text-decoration: none; color: black; font-size: 1pc; font-weight: bold;">Edit</a>
+            </button>
         </td>
-        <td class="delete">
-       		  <button class="delete" style="background-color: tomato;border: tomato;width: 100px;height: 30px;">
-       		 <a href="delete_request.jsp?id=<%= request1.getId() %>" style="text-decoration: none;color: black;font-size: 1pc;font-weight: bold;">Delete</a>	
-        </button>
-        </td>
+       <!--  <td class="delete">
+            <button class="delete" style="background-color: tomato; border: tomato; width: 100px; height: 30px;">
+                <a href="delete_request.jsp?id=<%= request1.getId() %>" style="text-decoration: none; color: black; font-size: 1pc; font-weight: bold;">Delete</a>	
+            </button>
+        </td> -->
     </tr>
     <%
         }
-    
+    } else {
+        
+        %>
+        <tr>
+            <td colspan="7">No campaigns found.</td>
+        </tr>
+        <%
+    }
     %>
 </table>
+
+<!-- Remaining HTML and JSP code below -->
+
 </section>
 		        
 

@@ -125,17 +125,18 @@
 <h1>Create Request</h1>
 
 <div class="container">
-    <form action="create_request" method="post" id = "requestForm" onsubmit="return validateForm()">
+    <form action="create_request" method="post" id = "requestForm" onsubmit="return validateForm(event)">
         <label for="title">Title:</label>
-        <input type="text" name="title" required>
+        <input type="text" name="title" required minlength="25" maxlength="150">
+         <span id="emailError" class="error"></span>
         
         <label for="description">Description:</label>
-        <textarea name="description" required></textarea>
+        <textarea name="description" required minlength="200" maxlength="400"></textarea>
 
         <div class="Basic_info">
 		    <label for="categoryId">Category</label>
 				    <select name="categoryId" class="option input_option" required>
-				   		<option value="None" >None</option>
+				   		
 				        <option value="4">Animal welfare</option>
 				        <option value="5">Children</option>
 				        <option value="2">Education</option>
@@ -267,37 +268,70 @@
 	</footer>
 	
 <script>
-    function validateForm() {
-    	event.preventDefault();
-    	console.log("inside validate forms");
-    	// Get the values of the input fields
-        var title = document.getElementsByName("title")[0].value.trim();
-        
-        var description = document.getElementsByName("description")[0].value.trim();
-        
-        var amount = document.getElementsByName("amount")[0].value.trim();
-        var imgUrl = document.getElementsByName("img_url")[0].value.trim();
 
-        // Check if any of the fields are empty
-        if (title.length === 0 || description.length === 0 || amount.length === 0 || imgUrl.length === 0) {
-            alert("All fields are required.");
-            return false; // Prevent form submission
-        }
+  
+  function validateForm(event) {
+      event.preventDefault(); // Prevent form submission
+      // Get form inputs
+      const title = document.forms["requestForm"]["title"].value.trim();
+      const description = document.forms["requestForm"]["description"].value.trim();
+      const categoryId = document.forms["requestForm"]["categoryId"].value.trim();
+      const img_url = document.forms["requestForm"]["img_url"].value.trim();
+      const amount = document.forms["requestForm"]["amount"].value.trim();
 
-        // Validate the "amount" field to ensure it's a positive number
-       // if (isNaN(amount) || parseFloat(amount) > 2500 || parseFloat(amount) <=1000000) {
-       //     alert("Amount must between 2500 to 1000000");
-         //   return false; // Prevent form submission
-        //	}
-        
-        let form = document.getElementById("requestForm");
-        form.submit();
+      // Regular expressions for validation
+      const titleRegex = /^[a-zA-Z0-9\s\.,!?()'"-]+$/; // Example title validation
+      const descriptionRegex = /^[a-zA-Z0-9\s\.,!?()'"-]+$/; // Example description validation
+      const img_urlRegex = /^https?:\/\/\S+\.\S+$/; // Example URL validation
 
-        // Continue with other form field validations here...
+      // Validation flags
+      let isValid = true;
+      
+      if (amount.includes(".")) {
+          alert("Amount cannot contain decimals.");
+          amount.focus();
+          return false;
+      }
 
-        return true; // Allow form submission if all validations pass
-    }
+      // Validate Title
+      if (title.length === 0 || description.length === 0 || amount.length === 0 || img_url.length === 0) {
+          alert("All fields are required.");
+          isValid = false;
+      } else if (!titleRegex.test(title) || title.length < 25 || title.length > 150) {
+          alert("Title must be between 25 and 150 characters and contain only letters, numbers, spaces, and punctuation.");
+          isValid = false;
+      }
+
+      // Validate Description
+      if (!descriptionRegex.test(description) || description.length < 200 || description.length > 400) {
+          alert("Description must be between 200 and 400 characters and contain only letters, numbers, spaces, and punctuation.");
+          isValid = false;
+      }
+
+      // Validate Image URL
+      if (!img_urlRegex.test(img_url)) {
+          alert("Invalid Image URL. Please provide a valid URL starting with 'http://' or 'https://'.");
+          isValid = false;
+      }
+
+      // Validate Amount
+      const minAmount = 10000;
+      const maxAmount = 1000000;
+      if (isNaN(amount) || amount < minAmount || amount > maxAmount) {
+          alert(`Amount must be a number between ${minAmount} and ${maxAmount}.`);
+          isValid = false;
+      }
+      
+
+      if (isValid) {
+          document.getElementById("requestForm").submit(); // Submit the form if valid
+      }
+  }
+
+  
+  
 </script>
+
 
 
 </body>

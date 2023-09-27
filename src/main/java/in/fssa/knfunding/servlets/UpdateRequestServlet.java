@@ -2,6 +2,7 @@ package in.fssa.knfunding.servlets;
 
 import java.io.IOException;
 
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +14,11 @@ import in.fssa.knfunding.service.RequestService;
 
 @WebServlet("/request/update")
 public class UpdateRequestServlet extends HttpServlet {
-    private RequestService requestService = new RequestService();
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private RequestService requestService = new RequestService();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int requestId = Integer.parseInt(request.getParameter("id"));
@@ -28,14 +33,27 @@ public class UpdateRequestServlet extends HttpServlet {
         updatedRequest.setDescription(description);
         updatedRequest.setCategoryId(categoryId);
         updatedRequest.setAmount(amount);
-
-       
+        
+        
+//        HttpSession session = request.getSession();
+//
+//		if (session != null) {
+//			User user = (User) session.getAttribute("user");
+//
+//			if (user != null) {
+//				int userId = user.getId();
+//				
+//				}
+//			}
+//       
 
         requestService.updateRequest(requestId, updatedRequest);
         
-        response.sendRedirect(request.getContextPath() + "/list_all_request");
+//        response.sendRedirect(request.getContextPath() + "/user_requests");
         
-        
+        response.getWriter().print("<script>alert('Request Updated Successfully');");
+		response.getWriter().print("window.location.href=\"" + request.getContextPath()+ "/user_requests\"");
+		response.getWriter().print("</script>");
       
     }
 }

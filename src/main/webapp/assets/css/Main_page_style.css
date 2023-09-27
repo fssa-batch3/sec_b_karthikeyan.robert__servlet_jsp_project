@@ -39,6 +39,7 @@ header{
     margin-right: 30px;
     margin-top: 22px;
 }
+
 .LoginRegister{
     display:flex;
     flex-direction: row;

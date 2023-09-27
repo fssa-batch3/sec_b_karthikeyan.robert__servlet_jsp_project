@@ -41,6 +41,8 @@ public class CreateRequestServlet extends HttpServlet {
         RequestService requestService = new RequestService();
         requestService.createRequest(newRequest);
 
-        response.sendRedirect(request.getContextPath() + "/Main_page.jsp");
+        response.getWriter().print("<script>alert('Request has been created Successfully');");
+		response.getWriter().print("window.location.href=\"" + request.getContextPath()+ "/MainPage\"");
+		response.getWriter().print("</script>");
     }
 }

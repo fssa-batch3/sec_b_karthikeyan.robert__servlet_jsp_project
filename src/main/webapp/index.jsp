@@ -22,13 +22,109 @@
         <link href="https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap" rel="stylesheet">
         <title>KN funding</title>
         <link rel="icon" type="image/x-icon" href="<%=request.getContextPath()%>/assets/images/icon_logo.jpg">
-        
+        <style type="text/css">
+.box {
+  width: 40%;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.2);
+  padding: 35px;
+  border: 2px solid #fff;
+  border-radius: 20px/50px;
+  background-clip: padding-box;
+  text-align: center;
+}
+/* CSS for the progress bar */
+.progress-bar {
+    width: 100%;
+    background-color: #f2f2f2;
+    height: 20px;
+    margin-top: 10px;
+}
+
+.progress {
+    width: 0;
+    height: 100%;
+    background-color: #4CAF50; /* Green color for the progress bar */
+}
+
+.button {
+  font-size: 1em;
+  padding: 10px;
+  color: #fff;
+  border: 2px solid #06D85F;
+  border-radius: 20px/50px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+}
+.button:hover {
+  background: #06D85F;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #06D85F;
+}
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+
+@media screen and (max-width: 700px){
+  .box{
+    width: 70%;
+  }
+  .popup{
+    width: 70%;
+  }
+}
+</style>
         
 
     </head>
 
     <header>
-        <a href="<%=request.getContextPath()%>/index.jsp">
+        <a href="<%=request.getContextPath()%>/IndexServlet">
             <img src="<%=request.getContextPath()%>/assets/images/logo.png" alt="image" class="logo"> 
         </a>
         <div class="search_input_logo">
@@ -97,12 +193,13 @@
         DonationService donationService = new DonationService();
         List<Donation> donationList = donationService.getDonationByRequestId(requestId);
         int totalAmount = 0;
+        int donorsCount = donationList.size();
         for (Donation donation : donationList) {
             totalAmount += donation.getDonation_amount();
         }
 %>
 
-<div class="profiles">
+<div class="profiles" style="<%= totalAmount >= request1.getAmount() ? "display: none;" : "" %>">
     <div class="profile_info">
         <div class="content">
             <img alt="post" name="img_url" class="profile-post" style="width: 100%;" src="<%=request1.getImg_url()%>">
@@ -114,7 +211,7 @@
          <div class="content">
          
             <div class="progress-bar">
-                <div class="progress" id="progress<%= requestId %>"></div> 
+                <div class="progress" id="progress<%= requestId %>" ></div> 
             </div>
             <div class="funded_backers">
                 <p style="margin: 5px;">
@@ -128,9 +225,16 @@
         </div>
         
         <div class="content">
-            <p style="border-bottom: 1px solid gray; margin-bottom:10px; " >
+            <div  style="display: flex; justify-content: space-between; border-bottom: 1px solid gray; margin-bottom:10px; ">
+            <p >
                  <b>Catergory : <%=request1.getCategory_name() %></b>
+                 
             </p>
+            <p><b>|</b></p>
+            
+             <p > <b><%= donorsCount %> Donors  </b>
+                </p>
+           </div> 
             <p>
                 <b><%=request1.getTitle()%></b>
             </p>
@@ -164,13 +268,13 @@
 
                 <div class="Explore_column">
                     <div class="animal_welfare choise ">
-                        <a href="<%=request.getContextPath()%>/inside profile/Choise_inside.jsp" class="explore_button">
+                        <a href="<%=request.getContextPath()%>/inside profile/Choise_inside.jsp" class="explore_button" >
                             <b class="choise_name"> Animal Welfare </b>
                         </a>
                     </div>
 
                     <div class="education choise ">
-                        <a href="<%=request.getContextPath()%>/inside profile/Choise_inside.jsp" class="explore_button">
+                        <a href="<%=request.getContextPath()%>/inside profile/Choise_inside.jsp" class="explore_button" >
                             <b class="choise_name"> Education </b>
                         </a>
                     </div>
@@ -202,54 +306,143 @@
 
             </div>
         </section>
-        <section>
-            <div class="container_box">
-                <div class="whychooseus_div">
-                    <h2 class="whyChoose_US">
-                        WHY CHOOSE US ?
-                    </h2>
+        <section class="feature_heading">
+		<h1 class="F_heading">SUCCESS STORIES</h1>
 
-                </div>
-                <div class="box_column">
-                    <div class="why-choose-us-box">
-                        <div class="icon">
-                            <!-- <i class="fa fa-lock"></i> -->
-                            <img src="https://cdn.iconscout.com/icon/free/png-512/free-lock-2693963-2235835.png?f=avif&w=512" alt="image" width="40px" height="40px">
-                        </div>
-                        <div class="title">
-                            <h4>SECURE</h4>
-                        </div>
-                        <div class="desc">
-                            <p>Your transaction and data is secured. The website is Encrypted, hosted on a secure cloud.</p>
-                        </div>
-                    </div>
-                    <div class="why-choose-us-box">
-                        <div class="icon">
-                            <!-- <i class="fa fa-lock"></i> -->
-                            <img src="https://cdn.iconscout.com/icon/free/png-512/free-history-watch-time-manage-visit-cache-46265.png?f=avif&w=512" alt="image" width="40px" height="40px">
-                        </div>
-                        <div class="title">
-                            <h4>FLEXIBLE</h4>
-                        </div>
-                        <div class="desc">
-                            <p>Contribute any amount as per your wish. There are no fixed amount requirements on campaigns.</p>
-                        </div>
-                    </div>
-                    <div class="why-choose-us-box">
-                        <div class="icon">
-                            <!-- <i class="fa fa-lock"></i> -->
-                            <img src="https://cdn.iconscout.com/icon/free/png-512/free-thumbs-up-44-624869.png?f=avif&w=512" alt="image" width="40px" height="40px">
-                        </div>
-                        <div class="title">
-                            <h4>EASY</h4>
-                        </div>
-                        <div class="desc">
-                            <p>Start your own fundraiser & petition or simply, support other campaigns in just a click.</p>
-                        </div>
-                    </div>
-                 </div>
+	</section>
+	
+	<section class="people_profile">
+	
+	<%
+    for (int i = requestList.size() - 1; i >= 0; i--) {
+        Request request1 = requestList.get(i);
+        int requestId = request1.getId();
+        DonationService donationService = new DonationService();
+        List<Donation> donationList = donationService.getDonationByRequestId(requestId);
+        int totalAmount = 0;
+        int donorsCount = donationList.size();
+        for (Donation donation : donationList) {
+            totalAmount += donation.getDonation_amount();
+        }
+
+        // Check the condition and decide whether to display the profile
+        if (totalAmount >= request1.getAmount()) {
+%>
+<div class="profiles" >
+    <div class="profile_info">
+        <div class="content">
+            <img alt="post" name="img_url" class="profile-post" style="width: 100%;" src="<%=request1.getImg_url()%>">
+        </div>
+       <!--  <div class="content_F_B">
+            
+        </div>
+        -->
+         <div class="content">
+         
+            <div class="progress-bar" style="background:tomato;" >
+                <div class="progress" id="progress<%= requestId %>" > <b>100%</b> </div> 
             </div>
-        </section>
+            
+            <div class="funded_backers" style="display: flex; justify-content: space-evenly; margin-bottom:10px;">
+                <p style="margin: 5px;">
+                    <b>RS.<%= totalAmount %></b>
+                </p>
+                <p style="margin: 5px;">raised out of</p>
+                <p style="margin: 5px;">
+                    <b>Rs.<%=request1.getAmount()%></b>
+                </p >
+                
+               
+            </div>
+        </div>
+        
+        <div class="content">
+        <div  style="display: flex; justify-content: space-between; border-bottom: 1px solid gray; margin-bottom:10px; ">
+            <p >
+                 <b>Catergory : <%=request1.getCategory_name() %></b>
+                 
+            </p>
+            <p><b>|</b></p>
+            
+             <p > <b><%= donorsCount %> Donors  </b>
+                </p>
+           </div> 
+            
+            <p>
+                <b><%=request1.getTitle()%></b>
+            </p>
+            <p>
+                <%=request1.getDescription()%>
+            </p>
+        </div>
+       
+        <div>
+            <button class="donate_btn">
+                <a style="text-decoration: none; color: black;">
+                    Funded
+                </a>
+            </button>
+        </div>
+    </div>
+</div>
+<%
+        }
+    }
+%>
+
+</section>
+       <section>
+		<div class="container_box">
+			<div class="whychooseus_div">
+				<h2 class="whyChoose_US">WHY CHOOSE US ?</h2>
+
+			</div>
+			<div class="box_column">
+				<div class="why-choose-us-box">
+					<div class="icon">
+						<img
+							src="https://cdn.iconscout.com/icon/free/png-512/free-lock-2693963-2235835.png?f=avif&w=512"
+							alt="image" width="40px" height="40px">
+					</div>
+					<div class="title">
+						<h4>SECURE</h4>
+					</div>
+					<div class="desc">
+						<p>Your transaction and data is secured. The website is
+							Encrypted, hosted on a secure cloud.</p>
+					</div>
+				</div>
+				<div class="why-choose-us-box">
+					<div class="icon">
+						<img
+							src="https://cdn.iconscout.com/icon/free/png-512/free-history-watch-time-manage-visit-cache-46265.png?f=avif&w=512"
+							alt="image" width="40px" height="40px">
+					</div>
+					<div class="title">
+						<h4>FLEXIBLE</h4>
+					</div>
+					<div class="desc">
+						<p>Contribute any amount as per your wish. There are no fixed
+							amount requirements on campaigns.</p>
+					</div>
+				</div>
+				<div class="why-choose-us-box">
+					<div class="icon">
+						<img
+							src="https://cdn.iconscout.com/icon/free/png-512/free-thumbs-up-44-624869.png?f=avif&w=512"
+							alt="image" width="40px" height="40px">
+					</div>
+					<div class="title">
+						<h4>EASY</h4>
+					</div>
+					<div class="desc">
+						<p>Start your own fundraiser & petition or simply, support
+							other campaigns in just a click.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
         <footer class="footer">
             <section class="footer_section1">
@@ -328,10 +521,46 @@
 
         
         <script>
-            
+    function updateProgressBar(totalAmount, targetAmount, progressBarId) {
+        const progress = (totalAmount / targetAmount) * 100;
+        const progressBar = document.querySelector('#' + progressBarId);
+        if (progressBar) {
+            if (progress <= 100) {
+                progressBar.style.width = progress + '%';
+            } else {
+                progressBar.style.width = '100%';
+            }
+            progressBar.innerText = Math.min(Math.floor(progress), 200) + '%';
 
+            // Set different background colors based on progress
+            if (progress > 70 && progress <= 90) {
+                progressBar.style.backgroundColor = 'tomato';
+            } else if (progress > 90) {
+                progressBar.style.backgroundColor = 'green';
+            } else {
+                progressBar.style.backgroundColor = 'tomato';
+            }
+        }
+    }
 
-    </script>
+    <%
+    for (int i = requestList.size() - 1; i >= 0; i--) {
+        Request request1 = requestList.get(i);
+        int requestId = request1.getId();
+        DonationService donationService = new DonationService();
+        List<Donation> donationList = donationService.getDonationByRequestId(requestId);
+        int totalAmount = 0;
+        for (Donation donation : donationList) {
+            totalAmount += donation.getDonation_amount();
+        }
+    %>
+
+    let totalAmount<%= requestId %> = <%= totalAmount %>;
+    let targetAmount<%= requestId %> = <%= request1.getAmount() %>;
+    updateProgressBar(totalAmount<%= requestId %>, targetAmount<%= requestId %>, 'progress<%= requestId %>'); 
+    <% } %>
+</script>
+
 
     </body>
 

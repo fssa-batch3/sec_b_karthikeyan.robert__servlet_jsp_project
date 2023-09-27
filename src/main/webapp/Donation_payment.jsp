@@ -355,31 +355,35 @@ input[type="submit"]:hover {
 	
 	
 	<script>
-		function validateAmount() {
-			
-		    const amountInput = document.getElementById("amount");
-		    const amountValue = amountInput.value.trim(); 
-		    
-		    
-		    if (/^0/.test(amountValue) || !/^[1-9][0-9]*$/.test(amountValue)) {
-		    	
-		        alert("Amount must be a positive integer without leading zeros.");
-		        amountInput.focus();
-		        return false; 
-		    }
-	
-		    
-		    const amount = parseInt(amountValue);
-		    if (amount < 250 || amount > 10000) {
-		    	
-		        alert("Amount must be grater that 250");
-		        amountInput.focus();
-		        return false; 
-		    }
-	
-		    return true; 
-		}
+	 function validateAmount() {
+	        const amountInput = document.getElementById("donation_amount");
+	        const amountValue = amountInput.value.trim();
 
+	        // Check if the amount contains a decimal point
+	        if (amountValue.includes(".")) {
+	            alert("Amount cannot contain decimals.");
+	            amountInput.focus();
+	            return false;
+	        }
+
+	        // Check if the entered value is a positive integer
+	        if (!/^[1-9][0-9]*$/.test(amountValue)) {
+	            alert("Amount must be a positive integer.");
+	            amountInput.focus();
+	            return false;
+	        }
+
+	        const amount = parseInt(amountValue);
+
+	        // Check if the amount is within the specified range
+	        if (amount < 250 || amount > 10000) {
+	            alert("Amount must be between 250 and 10,000.");
+	            amountInput.focus();
+	            return false;
+	        }
+			
+	        return true;
+	    }
 	</script>
 	
 </body>

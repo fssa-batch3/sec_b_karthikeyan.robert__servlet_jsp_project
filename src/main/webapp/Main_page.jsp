@@ -39,11 +39,6 @@
     margin-top: 10px;
 }
 
-.progress {
-    width: 0;
-    height: 100%;
-    background-color: #4CAF50; /* Green color for the progress bar */
-}
 
 .button {
   font-size: 1em;
@@ -116,6 +111,10 @@
     width: 70%;
   }
 }
+
+
+
+
 </style>
 
 </head>
@@ -140,7 +139,7 @@
 
 
 		<div class="profile_name">
-			<!-- KARTHIKEYAN -->
+			
 			<%=user.getFullName()%>
 		</div>
 
@@ -202,12 +201,16 @@
         DonationService donationService = new DonationService();
         List<Donation> donationList = donationService.getDonationByRequestId(requestId);
         int totalAmount = 0;
+        int donorsCount = donationList.size();
         for (Donation donation : donationList) {
             totalAmount += donation.getDonation_amount();
+            
+          
         }
+       
 %>
 
-<div class="profiles">
+<div class="profiles" style="<%= totalAmount >= request1.getAmount() ? "display: none;" : "" %>">
     <div class="profile_info">
         <div class="content">
             <img alt="post" name="img_url" class="profile-post" style="width: 100%;" src="<%=request1.getImg_url()%>">
@@ -221,21 +224,32 @@
             <div class="progress-bar">
                 <div class="progress" id="progress<%= requestId %>"></div> 
             </div>
-            <div class="funded_backers">
+            
+            <div class="funded_backers" style="display: flex; justify-content: space-evenly; margin-bottom:10px;">
                 <p style="margin: 5px;">
                     <b>RS.<%= totalAmount %></b>
                 </p>
                 <p style="margin: 5px;">raised out of</p>
                 <p style="margin: 5px;">
                     <b>Rs.<%=request1.getAmount()%></b>
-                </p>
+                </p >
+                
+               
             </div>
         </div>
         
         <div class="content">
-            <p style="border-bottom: 1px solid gray; margin-bottom:10px; " >
+        <div  style="display: flex; justify-content: space-between; border-bottom: 1px solid gray; margin-bottom:10px; ">
+            <p >
                  <b>Catergory : <%=request1.getCategory_name() %></b>
+                 
             </p>
+            <p><b>|</b></p>
+            
+             <p > <b><%= donorsCount %> Donors  </b>
+                </p>
+           </div> 
+            
             <p>
                 <b><%=request1.getTitle()%></b>
             </p>
@@ -270,7 +284,7 @@
 				<div class="animal_welfare choise">
 					<a
 						href="<%=request.getContextPath()%>/After_login_pages/after_login_choiceinside/AL_choice_inside.jsp"
-						class="explore_button"> <b class="choise_name"> Animal
+						class="explore_button"> <b class="choise_name" value= > Animal
 							Welfare </b>
 					</a>
 				</div>
@@ -315,6 +329,96 @@
 
 		</div>
 	</section>
+	<section class="feature_heading">
+		<h1 class="F_heading">SUCCESS STORIES</h1>
+
+	</section>
+	
+	<section class="people_profile">
+	
+	<%
+    for (int i = requestList.size() - 1; i >= 0; i--) {
+        Request request1 = requestList.get(i);
+        int requestId = request1.getId();
+        DonationService donationService = new DonationService();
+        List<Donation> donationList = donationService.getDonationByRequestId(requestId);
+        int totalAmount = 0;
+        int donorsCount = donationList.size();
+        for (Donation donation : donationList) {
+            totalAmount += donation.getDonation_amount();
+        }
+
+        // Check the condition and decide whether to display the profile
+        if (totalAmount >= request1.getAmount()) {
+%>
+<div class="profiles">
+    <div class="profile_info">
+        <div class="content">
+            <img alt="post" name="img_url" class="profile-post" style="width: 100%;" src="<%=request1.getImg_url()%>">
+        </div>
+       <!--  <div class="content_F_B">
+            
+        </div>
+        -->
+         <div class="content">
+         
+            <div class="progress-bar" style="background:tomato;" >
+                <div class="progress" id="progress<%= requestId %>" > <b>100%</b> </div> 
+            </div>
+            
+            <div class="funded_backers" style="display: flex; justify-content: space-evenly; margin-bottom:10px;">
+                <p style="margin: 5px;">
+                    <b>RS.<%= totalAmount %></b>
+                </p>
+                <p style="margin: 5px;">raised out of</p>
+                <p style="margin: 5px;">
+                    <b>Rs.<%=request1.getAmount()%></b>
+                </p >
+                
+               
+            </div>
+        </div>
+        
+        <div class="content">
+        <div  style="display: flex; justify-content: space-between; border-bottom: 1px solid gray; margin-bottom:10px; ">
+            <p >
+                 <b>Catergory : <%=request1.getCategory_name() %></b>
+                 
+            </p>
+            <p><b>|</b></p>
+            
+             <p > <b><%= donorsCount %> Donors  </b>
+                </p>
+           </div> 
+            
+            <p>
+                <b><%=request1.getTitle()%></b>
+            </p>
+            <p>
+                <%=request1.getDescription()%>
+            </p>
+        </div>
+       
+        <div>
+            <button class="donate_btn">
+                <a style="text-decoration: none; color: black;">
+                    Funded
+                </a>
+            </button>
+        </div>
+    </div>
+</div>
+<%
+        }
+    }
+%>
+	
+	</section>
+	
+	
+	
+	
+	
 	<section>
 		<div class="container_box">
 			<div class="whychooseus_div">
@@ -465,9 +569,32 @@
 	
 
 	<script>
-	
-		//progeressBar 
-		<%
+	function updateProgressBar(totalAmount, targetAmount, progressBarId) {
+	    const progress = (totalAmount / targetAmount) * 100;
+	    const progressBar = document.querySelector('#' + progressBarId);
+	    if (progressBar) {
+	        if (progress <= 100) {
+	            progressBar.style.width = progress + '%';
+	        } else {
+	            progressBar.style.width = '100%'; 
+	        }
+	        
+	        progressBar.innerText = Math.min(Math.floor(progress), 200) + '%'; 
+	        
+	        if (progress > 70 && progress <= 90) { 
+	            progressBar.style.backgroundColor = 'tomato';
+	        }
+	        else if(progress >= 91 && progress <= 200){
+	        	progressBar.style.backgroundColor = 'green';
+	        }
+	        else {
+	            progressBar.style.backgroundColor = 'tomato';
+	        }
+	    }
+	}
+
+
+    <%
     for (int i = requestList.size() - 1; i >= 0; i--) {
         Request request1 = requestList.get(i);
         int requestId = request1.getId();
@@ -481,44 +608,13 @@
 
     let totalAmount<%= requestId %> = <%= totalAmount %>;
     let targetAmount<%= requestId %> = <%= request1.getAmount() %>;
-    updateProgressBar(totalAmount<%= requestId %>, targetAmount<%= requestId %>, <%= requestId %>);
+    updateProgressBar(totalAmount<%= requestId %>, targetAmount<%= requestId %>, 'progress<%= requestId %>');
 
-    function updateProgressBar(totalAmount, targetAmount, requestId) {
-        const progress = (totalAmount / targetAmount) * 100;
-        const progressBar = document.querySelector('#progress<%= requestId %>');
-        if (progressBar) {
-            progressBar.style.width = progress + '%';
-            progressBar.innerText = Math.floor(progress) + '%';
-            if (progress > 70 && progress < 99) {
-                progressBar.style.backgroundColor = 'green';
-            } else {
-                progressBar.style.backgroundColor = 'tomato';
-            }
-        }
-    }
     <% } %>
+    
+    
+</script>
 
-		
-		//progressBAR
-
-		// let goal_amt = document.getElementById("goal").innerText;
-
-		// let colected_percentage=Math.floor((t_amount/goal_amt)*100);
-
-		// console.log(colected_percentage);
-
-		// const progressval = colected_percentage;
-		// const elm = document.getElementsByClassName("progressab")[0];
-		// elm.style.width = `${progressval}%`;
-
-		// elm.innerText = `${progressval}%`;
-
-		// if (progressval > 95 && progressval <= 100) {
-		//   elm.style.backgroundColor = "green";
-		// } else if (progressval > 50 && progressval < 90) {
-		//   elm.style.backgroundColor = "tomato";
-		// }
-	</script>
 
 </body>
 

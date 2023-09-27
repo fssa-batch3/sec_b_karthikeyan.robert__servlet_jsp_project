@@ -15,6 +15,10 @@ import in.fssa.knfunding.service.UserService;
 
 @WebServlet("/Login")
 public class LoginUserServlet extends HttpServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private UserService userService = new UserService();
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -29,11 +33,13 @@ public class LoginUserServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user);
 
-			System.out.println("login user " + request.getSession(false).getAttribute("user"));
-			response.sendRedirect(request.getContextPath() + "/Main_page.jsp");
+//			System.out.println("login user " + request.getSession(false).getAttribute("user"));
+			response.getWriter().print("<script>alert('Login Successfully');");
+			response.getWriter().print("window.location.href=\"" + request.getContextPath()+ "/MainPage\"");
+			response.getWriter().print("</script>");
 		} else {
 
-			request.setAttribute("errorMessage", "Invalid.Please try again.");
+			request.setAttribute("errorMessage", "Invalid Credentials.Please try again.");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("payment_login_page/login_page.jsp");
 			dispatcher.forward(request, response);
 		}

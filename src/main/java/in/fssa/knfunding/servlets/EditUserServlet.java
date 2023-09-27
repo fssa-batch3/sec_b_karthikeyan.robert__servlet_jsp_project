@@ -16,7 +16,8 @@ import in.fssa.knfunding.service.UserService;
 public class EditUserServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
        
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @SuppressWarnings("unused")
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         int id = Integer.parseInt(request.getParameter("id"));
         
@@ -27,6 +28,9 @@ public class EditUserServlet extends HttpServlet {
             
             RequestDispatcher dispatcher = request.getRequestDispatcher("/update_user.jsp");
             dispatcher.forward(request, response);
+//            response.getWriter().print("<script>alert('Profile has been updated Successfully');");
+//			response.getWriter().print("window.location.href=\"" + request.getContextPath()+ "/update_user.jsp\"");
+//			response.getWriter().print("</script>");
      
     }
 	

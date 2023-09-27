@@ -17,7 +17,12 @@
         <link rel="icon" type="image/x-icon" href="<%=request.getContextPath()%>/assets/images/icon_logo.jpg">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/Register_page_style.css">
         
-
+	<style>
+	.error{
+		color:red;
+	}	
+	
+	</style>
     </head>
 
     <header>
@@ -53,52 +58,41 @@
         <div id="login" class="center">
             <div class="container">
                 <div class="title">Register </div>
-                <form action="<%=request.getContextPath()%>/createUser" method="post" role="form">
-                    <div class="data">
-                        <div class="input">
-                            <label for="name">Full Name</label>
-                            <input pattern="[a-zA-Z0-9]+" type="text" id="name" required="true" name="name" placeholder="Full Name*" class="placeholder">
-                        </div> 
-                        <div class="input">
-                            <label for="email">Email Id</label>
-                            <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" type="text" id="email" name="email" required="true" placeholder="Email id* " class="placeholder">
-                        </div>
-            
-                        <div class="input">
-                            <label for="phoneNumber">Phone Number</label>
-                            <input pattern="[0-9].{9}"  type="text" id= "number" required="true" name="phoneNumber" placeholder="Phone number* " class="placeholder"> 
-                        </div>
-                        <div class="input">
-                            <label for="password" >Password</label>
-                            <input 
-                                id="password"
-                                name="password"
-                                pattern="(?=.*\d)(?=.*[a-z]).{8,}"
-                                title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
-                                type="password" 
-                                placeholder="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters" 
-                                required="true" class="placeholder">
-                        </div>
-                        <div class="input">
-                            <label for="password"> Confirm Password</label>
-                            <input 
-                                id="conform_password"
-                                name="password"
-                                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                                title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
-                                type="password" 
-                                placeholder="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters" 
-                                required="true" class="placeholder">
-                        </div>
-                        <div class="create_account">
-                            <button type="submit" class="create_account">
-                                REGISTER 
-                            </button>
-
-                        </div>
-           
-                    </div>  
-                </form>
+               <form action="<%=request.getContextPath()%>/createUser" method="post" role="form" onsubmit="return validateForm()">
+    <div class="data">
+        <div class="input">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" required="true" name="name" placeholder="Full Name*" class="placeholder">
+            <span id="nameError" class="error"></span>
+        </div>
+        <div class="input">
+            <label for="email">Email Id</label>
+            <input type="text" id="email" name="email" required="true" placeholder="Email id* " class="placeholder">
+            <span id="emailError" class="error"></span>
+        </div>
+        <div class="input">
+            <label for="phoneNumber">Phone Number</label>
+            <input type="tel" id="number" required="true"  name="phoneNumber" maxlength="10" placeholder="Phone number* " class="placeholder"> 
+            <span id="phoneNumberError" class="error"></span>
+        </div>
+        
+        <div class="input">
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" placeholder="Password*"  required="true" class="placeholder">
+            <span id="passwordError" class="error"></span>
+        </div>
+        <div class="input">
+            <label for="conform_password"> Confirm Password</label>
+            <input id="confirm_password" name="confirm_password" type="password" placeholder="Confirm Password*" required="true" class="placeholder">
+            <span id="confirmPasswordError" class="error"></span>
+        </div>
+        <div class="create_account">
+            <button type="submit" class="create_account">
+                REGISTER 
+            </button>
+        </div>
+    </div>  
+</form>
             </div>
         </div>
         <section>
@@ -222,7 +216,70 @@
             
             } -->
            
-        <script src="<%=request.getContextPath()%>/assets/script.js"></script>
+     <!--    <script src="/assets/script.js"></script> -->
+     <script>
+    function validateForm() {
+        const nameInput = document.getElementById("name");
+        const emailInput = document.getElementById("email");
+        const phoneNumberInput = document.getElementById("number");
+        const passwordInput = document.getElementById("password");
+        const confirmPasswordInput = document.getElementById("confirm_password");
+
+        const nameError = document.getElementById("nameError");
+        const emailError = document.getElementById("emailError");
+        const phoneNumberError = document.getElementById("phoneNumberError");
+        const passwordError = document.getElementById("passwordError");
+        const confirmPasswordError = document.getElementById("confirmPasswordError");
+
+        const nameRegex = /^[a-zA-Z0-9]+$/;
+        const emailRegex = /^[a-z0-9._%+-]+@[gmail]+\.[com]{3,}$/;
+        const phoneNumberRegex = /^[6789][0-9]{9}$/;
+        const passwordRegex = /^(?=.*\d)(?=.*[a-z]).{8,}$/;
+
+        let valid = true;
+
+        if (!nameRegex.test(nameInput.value)) {
+            nameError.textContent = "*Invalid name";
+            valid = false;
+        } else {
+            nameError.textContent = "";
+        }
+
+        if (!emailRegex.test(emailInput.value)) {
+            emailError.textContent = "*Invalid email";
+            valid = false;
+        } else {
+            emailError.textContent = "";
+        }
+
+        if (!phoneNumberRegex.test(phoneNumberInput.value)) {
+            phoneNumberError.textContent = "*Invalid phone number";
+            valid = false;
+        } else {
+            phoneNumberError.textContent = "";
+        }
+
+        if (!passwordRegex.test(passwordInput.value)) {
+            passwordError.textContent = "*Invalid password";
+            valid = false;
+        } else {
+            passwordError.textContent = "";
+        }
+
+        if (passwordInput.value !== confirmPasswordInput.value) {
+            confirmPasswordError.textContent = "*Passwords do not match";
+            valid = false;
+        } else {
+            confirmPasswordError.textContent = "";
+        }
+
+        return valid;
+    }
+    
+    
+   
+    
+</script>
 
     </body>
 

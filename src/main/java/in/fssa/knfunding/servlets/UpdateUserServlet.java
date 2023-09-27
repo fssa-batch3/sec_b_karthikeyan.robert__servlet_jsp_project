@@ -21,11 +21,13 @@ public class UpdateUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         UserService userService = new UserService();
-        PrintWriter out = response.getWriter();
+        @SuppressWarnings("unused")
+		PrintWriter out = response.getWriter();
 
         String name = request.getParameter("name");
         String email = request.getParameter("email");
-        Long phoneNumber = Long.parseLong(request.getParameter("phone_number"));
+        @SuppressWarnings("unused")
+		Long phoneNumber = Long.parseLong(request.getParameter("phone_number"));
         String password = request.getParameter("password");
         int id = Integer.parseInt(request.getParameter("id"));
 
@@ -44,9 +46,9 @@ public class UpdateUserServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
-		response.sendRedirect(request.getContextPath() + "/users");
-		
-		
-
+//		response.sendRedirect(request.getContextPath() + "/users");
+        response.getWriter().print("<script>alert('Profile has been Updated Successfully');");
+		response.getWriter().print("window.location.href=\"" + request.getContextPath()+ "/users\"");
+		response.getWriter().print("</script>");
     }
 }
