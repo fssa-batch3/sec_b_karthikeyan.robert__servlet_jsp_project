@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import in.fssa.knfunding.model.User;
 import in.fssa.knfunding.service.UserService;
@@ -45,13 +46,15 @@ public class CreateUserServlet extends HttpServlet {
                 newUser.setPassword(password);
                 
                 userService.create(newUser); 
-                
+                HttpSession session = request.getSession();
+                session.setAttribute("user", newUser);
                 response.getWriter().print("<script>alert('Account Created Successfully');");
-    			response.getWriter().print("window.location.href=\"" + request.getContextPath()+ "/payment_login_page/login_page.jsp\"");
+    			response.getWriter().print("window.location.href=\"" + request.getContextPath()+ "/Main_page.jsp\"");
     			response.getWriter().print("</script>");
 //                RequestDispatcher dis =  request.getRequestDispatcher("/payment_login_page/login_page.jsp");
                 											
 //                dis.forward(request, response);
+
             } 
         } catch (Exception e) {
             e.printStackTrace();

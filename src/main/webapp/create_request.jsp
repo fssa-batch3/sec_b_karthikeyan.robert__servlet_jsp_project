@@ -127,11 +127,12 @@
 <div class="container">
     <form action="create_request" method="post" id = "requestForm" onsubmit="return validateForm(event)">
         <label for="title">Title:</label>
-        <input type="text" name="title" required minlength="25" maxlength="150">
+        <input type="text" name="title" required minlength="15" maxlength="150">
          <span id="emailError" class="error"></span>
         
         <label for="description">Description:</label>
-        <textarea name="description" required minlength="200" maxlength="400"></textarea>
+        <textarea name="description" required minlength="50" maxlength="200"></textarea>
+        
 
         <div class="Basic_info">
 		    <label for="categoryId">Category</label>
@@ -297,13 +298,13 @@
       if (title.length === 0 || description.length === 0 || amount.length === 0 || img_url.length === 0) {
           alert("All fields are required.");
           isValid = false;
-      } else if (!titleRegex.test(title) || title.length < 25 || title.length > 150) {
+      } else if (!titleRegex.test(title) || title.length < 15 || title.length > 150) {
           alert("Title must be between 25 and 150 characters and contain only letters, numbers, spaces, and punctuation.");
           isValid = false;
       }
 
       // Validate Description
-      if (!descriptionRegex.test(description) || description.length < 200 || description.length > 400) {
+      if (!descriptionRegex.test(description)) {
           alert("Description must be between 200 and 400 characters and contain only letters, numbers, spaces, and punctuation.");
           isValid = false;
       }
